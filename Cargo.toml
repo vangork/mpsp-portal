@@ -1,0 +1,35 @@
+[package]
+name = "mpsp_portal"
+version = "1.0.0"
+authors = ["Luis Liu <vangork@live.com>"]
+edition = "2024"
+license = "Apache-2.0"
+default-run = "mpsp_portal"
+
+[dependencies]
+actix-web = "4.12.1"
+aliyun-oss-rust-sdk = { version = "0.2.2", features = ["async"] }
+base64 = "0.22.1"
+bcrypt = "0.17.0"
+chrono = { version = "0.4", features = ["serde"] }
+csv = "1.4"
+derive_more = "2"
+diesel = { version = "2.3.0", features = ["chrono", "mysql", "r2d2", "serde_json", "time"] }
+diesel-async = { version = "0.7.0", features = ["deadpool", "mysql"] }
+dotenv = "0.15"
+env_logger = "0.11.8"
+futures-util = { version = "0.3.17", default-features = false, features = ["std"] }
+log = "0.4"
+mysql = "24"
+reqwest = { version = "0.13", features = ["json"] }
+serde = "1"
+serde_derive = "1"
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+uuid = { version = "1.19", features = ["v4"] }
+
+actix-session = { version = "0.11", features = ["redis-session", "redis-pool"] }
+deadpool-redis = "0.22.0"
+
+[dev-dependencies]
+diesel_migrations = "2.3.0"

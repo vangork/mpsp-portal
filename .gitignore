@@ -1,0 +1,8 @@
+/target/
+**/*.rs.bk
+web_copy/
+.env
+venv/
+dump.rdb
+reports/
+data/
