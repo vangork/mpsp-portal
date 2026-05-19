@@ -199,6 +199,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: () => import('../pages/Index.vue'),
   },
+  {
+    name: 'order',
+    path: '/order',
+    component: () => import('../pages/Order.vue'),
+  },
 ]
 
 const router = createRouter({

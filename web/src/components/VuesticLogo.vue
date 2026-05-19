@@ -1,8 +1,6 @@
 <template>
-  <svg :height="height" alt="Vuestic Admin" fill="none" viewBox="0 0 478 57" xmlns="http://www.w3.org/2000/svg">
-    <text y="55" font-weight="bold" font-style="italic" font-size="62" fill="url(#paint0_linear)" letter-spacing="7px">
-      Q<tspan baseline-shift="super" font-size="40">4</tspan>Omics
-    </text>
+  <svg :height="height" alt="Vuestic Admin" fill="none" viewBox="0 0 235 57" xmlns="http://www.w3.org/2000/svg">
+    <text y="55" font-weight="bold" font-style="italic" font-size="70" fill="url(#paint0_linear)" letter-spacing="7px">MPSP</text>
     <defs>
       <linearGradient id="paint0_linear" gradientUnits="userSpaceOnUse" x1="0" x2="357.64" y1="56.1386" y2="56.1386">
         <stop :stop-color="colorsComputed.end" />

@@ -11,6 +11,10 @@ const login = () => {
   authStore.isLoggedIn ? push({ name: 'dashboard' }) : push({ name: 'login' })
 }
 
+const goToOrder = () => {
+  push({ name: 'order' })
+}
+
 const capabilities = [
   {
     icon: 'fas fa-vial',
@@ -213,6 +217,12 @@ const achievements = [
               </div>
             </div>
           </div>
+        </div>
+        <div class="contact-actions">
+          <button class="btn-sample" @click="goToOrder">
+            <i class="fas fa-file-medical-alt"></i>
+            发送样本信息单
+          </button>
         </div>
       </div>
     </section>
@@ -783,11 +793,29 @@ $radius: 16px;
   font-weight: 600;
   color: white;
 }
-.contact-btn {
-  width: 100%;
+.contact-actions {
+  margin-top: 40px;
+  display: flex;
   justify-content: center;
-  padding: 18px;
+}
+.btn-sample {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 16px 40px;
   font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.35);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(5, 150, 105, 0.5);
+  }
 }
 
 // ── footer ──

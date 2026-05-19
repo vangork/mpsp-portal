@@ -1,7 +1,7 @@
 <template>
   <VaForm ref="form" @submit.prevent="submit">
     <h1 class="font-semibold text-4xl mb-4">{{ t('auth.login') }}</h1>
-    <p class="text-base mb-4 leading-5">{{ t('auth.welcome') }} <i>Q<sup>4</sup>Omics</i> Portal</p>
+    <p class="text-base mb-4 leading-5">{{ t('auth.welcome') }} MPSP Portal</p>
     <VaInput
       v-model="formData.email"
       :rules="[validators.required, validators.email]"
