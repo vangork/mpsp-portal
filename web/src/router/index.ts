@@ -2,7 +2,6 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import AppLayout from '../layouts/AppLayout.vue'
 import AuthLayout from '../layouts/AuthLayout.vue'
 import RouteViewComponent from '../layouts/RouterBypass.vue'
-import RouterOmics from '../layouts/RouterOmics.vue'
 import RouterPassthrough from '../layouts/RouterPassthrough.vue'
 import { useAuthStore } from '../stores/auth'
 
@@ -27,48 +26,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/user/Dashboard.vue'),
       },
       {
-        name: 'quartet',
-        path: '/quartet',
-        component: RouterOmics,
-        children: [
-          {
-            name: 'dna',
-            path: 'dna',
-            component: () => import('../pages/omics/DNA.vue'),
-          },
-          {
-            name: 'rna',
-            path: 'rna',
-            component: () => import('../pages/omics/RNA.vue'),
-          },
-          {
-            name: 'protein',
-            path: 'protein',
-            component: () => import('../pages/omics/Protein.vue'),
-          },
-          {
-            name: 'metabolism',
-            path: 'metabolism',
-            component: () => import('../pages/omics/Metabolism.vue'),
-          },
-        ],
-      },
-      {
-        name: 'plasmix',
-        path: '/plasmix',
-        component: RouterOmics,
-        children: [
-          {
-            name: 'plasmix_protein',
-            path: 'protein',
-            component: () => import('../pages/omics/PlasmixProtein.vue'),
-          },
-          {
-            name: 'plasmix_metabolism',
-            path: 'metabolism',
-            component: () => import('../pages/omics/PlasmixMetabolism.vue'),
-          },
-        ],
+        name: 'projects',
+        path: 'projects',
+        component: () => import('../pages/user/projects/Projects.vue'),
       },
       {
         name: 'preferences',

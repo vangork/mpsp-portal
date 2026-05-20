@@ -5,7 +5,7 @@
         <VaButton preset="secondary" color="textPrimary">
           <span class="profile-dropdown__anchor min-w-max">
             <slot />
-            <VaAvatar :size="32"><i class="fas fa-user-md"></i></VaAvatar>
+            <VaAvatar :size="32"><i class="fas fa-user"></i></VaAvatar>
           </span>
         </VaButton>
       </template>

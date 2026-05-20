@@ -15,46 +15,11 @@ export const userNavigationRoutes = {
       },
     },
     {
-      name: 'quartet',
-      displayName: 'menu.quartet',
+      name: 'projects',
+      displayName: 'menu.projects',
       meta: {
         icon: 'folder_shared',
       },
-      children: [
-        {
-          name: 'dna',
-          displayName: 'menu.dna',
-        },
-        {
-          name: 'rna',
-          displayName: 'menu.rna',
-        },
-        {
-          name: 'protein',
-          displayName: 'menu.protein',
-        },
-        {
-          name: 'metabolism',
-          displayName: 'menu.metabolism',
-        },
-      ],
-    },
-    {
-      name: 'plasmix',
-      displayName: 'menu.plasmix',
-      meta: {
-        icon: 'groups',
-      },
-      children: [
-        {
-          name: 'plasmix_protein',
-          displayName: 'menu.plasmix_protein',
-        },
-        {
-          name: 'plasmix_metabolism',
-          displayName: 'menu.plasmix_metabolism',
-        },
-      ],
     },
     // {
     //   name: 'payments',
