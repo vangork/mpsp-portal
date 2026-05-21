@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { SAMPLE_TYPE_OPTIONS, TEST_ITEM_OPTIONS } from './user/projects/types'
 
 const router = useRouter()
 
@@ -230,15 +231,9 @@ const cancelSubmit = () => {
                     <td>
                       <select v-model="sample.sampleType">
                         <option value="">请选择</option>
-                        <option>细胞</option>
-                        <option>FFPE白片</option>
-                        <option>新鲜冻存组织</option>
-                        <option>全血</option>
-                        <option>血浆</option>
-                        <option>血清</option>
-                        <option>cfDNA</option>
-                        <option>DNA</option>
-                        <option>RNA</option>
+                        <option v-for="option in SAMPLE_TYPE_OPTIONS" :value="option">
+                          {{ option }}
+                        </option>
                       </select>
                     </td>
                     <td><input v-model="sample.species" type="text" placeholder="物种" /></td>
@@ -248,11 +243,9 @@ const cancelSubmit = () => {
                     <td>
                       <select v-model="sample.testItem">
                         <option value="">请选择</option>
-                        <option>全基因组测序</option>
-                        <option>全外显子组测序</option>
-                        <option>转录组测序(Poly-A法)</option>
-                        <option>转录组测序(Ribo-zero法)</option>
-                        <option>小RNA测序</option>
+                        <option v-for="option in TEST_ITEM_OPTIONS" :value="option">
+                          {{ option }}
+                        </option>
                       </select>
                     </td>
                     <td><input v-model="sample.platform" type="text" placeholder="测序平台" /></td>

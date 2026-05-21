@@ -3,23 +3,38 @@ import { ref, computed } from 'vue'
 import SampleModal from './modals/SampleModal.vue'
 import { Project, STAGES } from './types'
 import { PROJECT_SAMPLES } from '../../../data/pages/projects'
+import ExtractionModal from './modals/ExtractionModal.vue'
+import OtherModal from './modals/OtherModal.vue'
 
 
 const projects = ref<Project[]>(PROJECT_SAMPLES)
 
 const selectedProject = ref<Project | null>(null)
-const showModal = ref(false)
-
+const showSampleModal = ref(false)
+const showExtractionModal = ref(false)
+const showOtherModal = ref(false)
 
 const openProject = (project: Project) => {
   selectedProject.value = { ...project }
-  showModal.value = true
+
+  switch (project.stage) {
+    case 0:
+      showSampleModal.value = true
+      break
+    case 1:
+      showExtractionModal.value = true
+      break
+    default:
+      // For stage 5 (sequencing) and beyond, we can either show a different modal or reuse one of the above
+      showOtherModal.value = true
+      break
+  }
 }
 
 const projectsByStage = (stageIndex: number) => projects.value.filter((p) => p.stage === stageIndex)
 
 const priorityColor = (p: string) => ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
-const priorityLabel = (p: string) => ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? ''
+const priorityLabel = (p: string) => ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? '未设置'
 
 const totalProjects = computed(() => projects.value.length)
 const sequencingProjects = computed(() => projects.value.filter((p) => p.stage === 5).length)
@@ -72,7 +87,7 @@ const inProgressProjects = computed(() => projects.value.filter((p) => p.stage >
               </div>
 
               <!-- Project name -->
-              <div class="card-name">{{ project.name }}</div>
+              <div class="card-name">{{ project.institution }}</div>
 
               <!-- Tags -->
               <div class="card-tags">
@@ -107,7 +122,9 @@ const inProgressProjects = computed(() => projects.value.filter((p) => p.stage >
     </VaCard>
 
     <!-- ── PROJECT DETAIL MODAL ── -->
-    <SampleModal v-model="showModal" :project="selectedProject"></SampleModal>
+    <SampleModal v-model="showSampleModal" :project="selectedProject"></SampleModal>
+    <ExtractionModal v-model="showExtractionModal" :project="selectedProject"></ExtractionModal>
+    <OtherModal v-model="showOtherModal" :project="selectedProject"></OtherModal>
   </div>
 </template>
 
@@ -267,6 +284,8 @@ const inProgressProjects = computed(() => projects.value.filter((p) => p.stage >
 
 // ── Project card ──
 .project-card {
+  // border: 1px solid #ccc;
+  // padding: 3px;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 
