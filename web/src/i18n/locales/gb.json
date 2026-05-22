@@ -74,6 +74,8 @@
     "overview": "Overview",
     "users": "Users",
     "projects": "Projects Kanban",
+    "projects_details": "Projects Details",
+    "billing_info": "Billing info",
     "quartet": "Quartet",
     "plasmix": "Plasmix",
     "dna": "Genomics",
@@ -339,6 +341,9 @@
     "add": "Add",
     "leave_empty_unchanged": "Leave empty to keep unchanged",
     "confirm_form_change_disregard": "Form has unsaved changes. Are you sure you want to close it?"
+  },
+  "project": {
+    "filter_by_stage": "Filter by stage"
   },
   "treeView": {
     "basic": "Basic",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { AdminDNAItem } from '../types'
+import { AdminDNAItem } from '../../omics/types'
 import { formatDate } from '../../../omics/composables/useOmics'
 import { DNAFamilyMember } from '../../../omics/types'
 

@@ -28,7 +28,3 @@ dist.tar.gz
 
 # Local Netlify folder
 .netlify
-
-output/*
-!output/builder.R
-public/vfs/

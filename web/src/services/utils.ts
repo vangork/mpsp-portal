@@ -34,3 +34,13 @@ export const humanFileSize = (bytes: number, si = false, dp = 1) => {
 
   return bytes.toFixed(dp) + ' ' + units[u]
 }
+
+export const formatDate = (e: Date) => e.toLocaleDateString('en-CA')
+
+export const roundTo = function (num: number | null, places: number) {
+  if (num === null) {
+    return null
+  }
+  const factor = 10 ** places
+  return Math.round(num * factor) / factor
+}

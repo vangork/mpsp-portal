@@ -18,7 +18,7 @@ export const userNavigationRoutes = {
       name: 'projects',
       displayName: 'menu.projects',
       meta: {
-        icon: 'folder_shared',
+        icon: 'vuestic-iconset-files',
       },
     },
     // {
@@ -42,13 +42,13 @@ export const userNavigationRoutes = {
     //     },
     //   ],
     // },
-    {
-      name: 'faq',
-      displayName: 'menu.faq',
-      meta: {
-        icon: 'quiz',
-      },
-    },
+    // {
+    //   name: 'faq',
+    //   displayName: 'menu.faq',
+    //   meta: {
+    //     icon: 'quiz',
+    //   },
+    // },
   ] as INavigationRoute[],
 }
 
@@ -69,46 +69,18 @@ export const adminNavigationRoutes = {
       },
     },
     {
-      name: 'admin_quartet',
-      displayName: 'menu.quartet',
+      name: 'admin_projects',
+      displayName: 'menu.projects_details',
       meta: {
-        icon: 'folder_shared',
+        icon: 'vuestic-iconset-files',
       },
-      children: [
-        {
-          name: 'admin_dna',
-          displayName: 'menu.dna',
-        },
-        {
-          name: 'admin_rna',
-          displayName: 'menu.rna',
-        },
-        {
-          name: 'admin_protein',
-          displayName: 'menu.protein',
-        },
-        {
-          name: 'admin_metabolism',
-          displayName: 'menu.metabolism',
-        },
-      ],
     },
     {
-      name: 'admin_plasmix',
-      displayName: 'menu.plasmix',
+      name: 'admin_billing',
+      displayName: 'menu.billing_info',
       meta: {
-        icon: 'groups',
+        icon: 'credit_card',
       },
-      children: [
-        {
-          name: 'admin_plasmix_protein',
-          displayName: 'menu.plasmix_protein',
-        },
-        {
-          name: 'admin_plasmix_metabolism',
-          displayName: 'menu.plasmix_metabolism',
-        },
-      ],
     },
   ] as INavigationRoute[],
 }

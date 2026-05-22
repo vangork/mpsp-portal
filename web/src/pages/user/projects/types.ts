@@ -9,6 +9,7 @@ export const STAGES = [
   { idx:5, label: '测序', icon: 'memory', color: 'primary', colour: 'var(--va-primary)', },
 ] as const
 
+export type StageLabel = typeof STAGES[number]['label']
 export type StageIndex = typeof STAGES[number]['idx']
 
 export const STAGE_STEPS = STAGES.map((s) => ({ label: s.label }))

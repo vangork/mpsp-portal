@@ -90,19 +90,24 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/admin/users/UsersPage.vue'),
       },
       {
+        name: 'admin_projects',
+        path: 'projects',
+        component: () => import('../pages/admin/projects/Projects.vue'),
+      },
+      {
+        name: 'admin_billing',
+        path: 'billing',
+        component: () => import('../pages/admin/billing/Bills.vue'),
+      },
+      {
         name: 'admin_quartet',
         path: 'quartet',
         component: RouterPassthrough,
         children: [
           {
-            name: 'admin_dna',
-            path: 'dna',
-            component: () => import('../pages/admin/omics/DNA.vue'),
-          },
-          {
             name: 'admin_rna',
             path: 'rna',
-            component: () => import('../pages/admin/omics/RNA.vue'),
+            component: () => import('../pages/admin/billing/Bills.vue'),
           },
           {
             name: 'admin_protein',
@@ -190,7 +195,7 @@ router.beforeEach(async (to, from) => {
   if (
     (to.meta && to.meta.guard == 'guest' && authStore.isLoggedIn) ||
     (to.meta && to.meta.guard == 'user' && !authStore.isLoggedIn) ||
-    (to.meta && to.meta.guard == 'admin' && !authStore.isAdmin)
+    (to.meta && to.meta.guard == 'admin' && (!authStore.isLoggedIn || !authStore.isAdmin))
   ) {
     return { name: 'index' }
   }

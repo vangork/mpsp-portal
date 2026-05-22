@@ -126,6 +126,8 @@
     "overview": "使用概览",
     "users": "用户管理",
     "projects": "项目看板",
+    "projects_details": "项目详情",
+    "billing_info": "报价清单",
     "quartet": "Quartet",
     "plasmix": "Plasmix",
     "dna": "基因组",
@@ -390,6 +392,9 @@
     "add": "添加",
     "leave_empty_unchanged": "不修改请留空",
     "confirm_form_change_disregard": "有未保存的更改，确认取消么？"
+  },
+  "project": {
+    "filter_by_stage": "按阶段筛选"
   },
   "treeView": {
     "basic": "基本型",
