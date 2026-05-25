@@ -345,6 +345,11 @@
   "project": {
     "filter_by_stage": "Filter by stage"
   },
+  "billing": {
+    "unit_price": "Unit Price",
+    "quantity": "Quantity",
+    "total_price": "Total Price"
+  },
   "treeView": {
     "basic": "Basic",
     "icons": "Icons",

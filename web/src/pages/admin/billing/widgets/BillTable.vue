@@ -102,13 +102,6 @@ const totalPages = computed(() => Math.ceil(props.pagination.total / props.pagin
         <VaButton
           preset="primary"
           size="small"
-          icon="mso-visibility"
-          aria-label="View item"
-          @click="emit('view-item', rowData as AdminBill)"
-        />
-        <VaButton
-          preset="primary"
-          size="small"
           icon="mso-edit"
           aria-label="Edit item"
           @click="emit('edit-item', rowData as AdminBill)"

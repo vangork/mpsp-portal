@@ -123,7 +123,7 @@
     "faq": "常见问题解答",
     "user_panel": "用户面板",
     "admin_panel": "管理面板",
-    "overview": "使用概览",
+    "overview": "平台概览",
     "users": "用户管理",
     "projects": "项目看板",
     "projects_details": "项目详情",
@@ -395,6 +395,11 @@
   },
   "project": {
     "filter_by_stage": "按阶段筛选"
+  },
+  "billing": {
+    "unit_price": "单价",
+    "quantity": "数量",
+    "total_price": "总价"
   },
   "treeView": {
     "basic": "基本型",

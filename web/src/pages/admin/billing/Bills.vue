@@ -40,7 +40,7 @@
     close-button
   >
     <h1 class="va-h5">{{ `${t('dna.edit_data')}: ${itemToEdit?.id}` }}</h1>
-    <EditRNAForm
+    <EditBill
       :item="itemToEdit!"
       @close="cancel"
       @save="
@@ -66,8 +66,7 @@ import { useAdminBillsStore } from '../../../stores/admin-bills'
 import { STAGES, StageLabel, StageIndex } from '../../user/projects/types'
 import { AdminBill } from './types'
 import BillTable from './widgets/BillTable.vue'
-import EditRNAForm from './widgets/EditRNAForm.vue'
-import ViewRNAForm from './widgets/ViewRNAForm.vue'
+import EditBill from './widgets/EditBill.vue'
 
 const { t } = useI18n()
 

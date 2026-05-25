@@ -14,9 +14,15 @@ export type Filters = {
 }
 
 export const getAdminBills = async () => {
+  const emptyFee = () => ({ unitPrice: null, totalPrice: null })
   return PROJECT_SAMPLES.map((p) => ({
     ...p,
     price: 0,
+    extractionFee: emptyFee(),
+    qualityCheckFee: emptyFee(),
+    libraryFee: emptyFee(),
+    sequencingFee: emptyFee(),
+    analysisServiceFee: emptyFee(),
   }))
   // const response = await fetch(api.adminDnas())
   // if (!response.ok) {

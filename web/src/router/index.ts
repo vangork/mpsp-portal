@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: 'dashboard',
         path: 'dashboard',
-        component: () => import('../pages/user/Dashboard.vue'),
+        component: () => import('../pages/user/dashboard/Dashboard.vue'),
       },
       {
         name: 'projects',
