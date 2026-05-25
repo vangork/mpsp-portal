@@ -1,24 +1,29 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { defineVaDataTableColumns } from 'vuestic-ui'
-// import UserAvatar from '../../../users/widgets/UserAvatar.vue'
-// import ProjectStatusBadge from '../../../projects/components/ProjectStatusBadge.vue'
-// import { useProjects } from '../../../projects/composables/useProjects'
+import { useProjectsStore } from '../../../../stores/projects'
 import { Pagination } from '../../../../data/pages/projects'
+import { STAGES } from '../../projects/types'
 import { ref } from 'vue'
-// import { useProjectUsers } from '../../../projects/composables/useProjectUsers'
 
 const columns = defineVaDataTableColumns([
-  { label: 'Name', key: 'project_name', sortable: true },
-  { label: 'Status', key: 'status', sortable: true },
-  { label: 'Team', key: 'team', sortable: true },
+  { label: 'ID', key: 'id', sortable: true },
+  { label: '机构', key: 'institution', sortable: true },
+  { label: '样本数量', key: 'count', sortable: true },
+  { label: '状态', key: 'stage', sortable: true },
 ])
 
 const pagination = ref<Pagination>({ page: 1, perPage: 5, total: 0 })
+const projectsStore = useProjectsStore()
+
 // const { projects, isLoading, sorting } = useProjects({
 //   pagination,
 // })
 
-// const { getTeamOptions, getUserById } = useProjectUsers()
+onMounted(async () => {
+  await projectsStore.refreshProjects()
+})
+
 </script>
 
 <template>
@@ -28,38 +33,35 @@ const pagination = ref<Pagination>({ page: 1, perPage: 5, total: 0 })
       <VaButton preset="primary" size="small" to="/user/projects">View all projects</VaButton>
     </VaCardTitle>
     <VaCardContent>
-      <!-- <div v-if="projects.length > 0">
+      <div v-if="projectsStore.projects.length > 0">
         <VaDataTable
-          v-model:sort-by="sorting.sortBy"
-          v-model:sorting-order="sorting.sortingOrder"
-          :items="projects"
+          :items="projectsStore.projects.slice(0, 6)"
           :columns="columns"
-          :loading="isLoading"
+          :loading="projectsStore.loading"
         >
-          <template #cell(project_name)="{ rowData }">
+          <template #cell(id)="{ rowData }">
+            {{ rowData.id }}
+          </template>
+          <template #cell(institution)="{ rowData }">
             <div class="ellipsis max-w-[230px] lg:max-w-[450px]">
-              {{ rowData.project_name }}
+              {{ rowData.institution }}
             </div>
           </template>
-          <template #cell(project_owner)="{ rowData }">
+          <template #cell(contact)="{ rowData }">
             <div class="flex items-center gap-2 ellipsis max-w-[230px]">
-              <UserAvatar
-                v-if="getUserById(rowData.project_owner)"
-                :user="getUserById(rowData.project_owner)!"
-                size="small"
-              />
-              {{ getUserById(rowData.project_owner)?.fullname }}
+              {{ rowData.contact }}
             </div>
           </template>
-          <template #cell(team)="{ rowData: project }">
-            <VaAvatarGroup size="small" :options="getTeamOptions(project.team)" :max="2" />
+          <template #cell(count)="{ rowData }">
+            <!-- <VaAvatarGroup size="small" :options="getTeamOptions(project.team)" :max="2" /> -->
+             {{ rowData.sampleCount }}
           </template>
-          <template #cell(status)="{ rowData: project }">
-            <ProjectStatusBadge :status="project.status" />
+          <template #cell(stage)="{ rowData }">
+            <VaBadge :text="STAGES[rowData.stage]?.label || '未知'" :color="STAGES[rowData.stage]?.color || 'dark'" />
           </template>
         </VaDataTable>
       </div>
-      <div v-else class="p-4 flex justify-center items-center text-[var(--va-secondary)]">No projects</div> -->
+      <div v-else class="p-4 flex justify-center items-center text-[var(--va-secondary)]">No projects</div>
     </VaCardContent>
   </VaCard>
 </template>

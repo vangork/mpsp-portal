@@ -12,6 +12,13 @@ export type Filters = {
   search: string
 }
 
+export const getProjects = async () => {
+  return PROJECT_SAMPLES
+}
+
+export const updateProject = async (item: Project) => {
+}
+
 export const getAdminProjects = async () => {
   return PROJECT_SAMPLES.map((p) => ({
     ...p,
