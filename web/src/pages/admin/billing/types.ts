@@ -12,4 +12,5 @@ export type AdminBill = Project & {
   libraryFee: FeeItem
   sequencingFee: FeeItem
   analysisServiceFee: FeeItem
+  status: 'pending' | 'paid' | 'finish'
 }

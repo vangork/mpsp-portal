@@ -25,7 +25,7 @@ const pagination = ref<Pagination>({ page: 1, perPage: 5, total: 0 })
   <VaCard>
     <VaCardTitle class="flex items-start justify-between">
       <h1 class="card-title text-secondary font-bold uppercase">Projects</h1>
-      <VaButton preset="primary" size="small" to="/projects">View all projects</VaButton>
+      <VaButton preset="primary" size="small" to="/user/projects">View all projects</VaButton>
     </VaCardTitle>
     <VaCardContent>
       <!-- <div v-if="projects.length > 0">

@@ -42,8 +42,8 @@ const feeRows: { label: string; key: keyof Pick<AdminBill, 'extractionFee' | 'qu
   <VaForm class="flex-col justify-start items-start gap-4 inline-flex w-full">
     <div class="self-stretch flex-col justify-start items-start gap-4 flex">
       <div class="flex gap-4 flex-col sm:flex-row w-full">
-        <VaInput :model-value="newItem.institution" :label="t('rna.name')" class="w-full sm:w-1/2" readonly />
-        <VaInput :model-value="newItem.contact" :label="t('rna.name')" class="w-full sm:w-1/2" readonly />
+        <VaInput :model-value="newItem.institution" :label="t('rna.name')" class="w-full sm:w-1/2" disabled />
+        <VaInput :model-value="newItem.contact" :label="t('rna.name')" class="w-full sm:w-1/2" disabled />
       </div>
 
       <div class="flex gap-4 flex-col sm:flex-row w-full">
@@ -96,6 +96,16 @@ const feeRows: { label: string; key: keyof Pick<AdminBill, 'extractionFee' | 'qu
             <VaButton preset="primary" @click="">下载报价单</VaButton>
           </div>
         </div>
+      </div>
+
+      <div class="flex gap-4 flex-col sm:flex-row w-full">
+        <VaSelect
+          v-model="newItem.status"
+          label="财务状态"
+          class="w-full sm:w-1/2"
+          value-by="value"
+          placeholder="财务状态"
+        />
       </div>
 
       <div class="flex gap-2 flex-col-reverse items-stretch justify-end w-full sm:flex-row sm:items-center">

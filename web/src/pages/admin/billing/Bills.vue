@@ -37,7 +37,7 @@
     size="small"
     mobile-fullscreen
     hide-default-actions
-    close-button
+    no-outside-dismiss
   >
     <h1 class="va-h5">{{ `${t('dna.edit_data')}: ${itemToEdit?.id}` }}</h1>
     <EditBill

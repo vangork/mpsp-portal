@@ -82,7 +82,7 @@ const achievements = [
           平台
         </h1>
         <p class="hero-sub">
-          以<strong>标准化</strong>为核心竞争力，制定 ISO 国际标准，研发国家级标准物质，<br class="d-none-sm" />
+          (Molecular Phenotyping Sequencing Platform)以<strong>标准化</strong>为核心竞争力，制定 ISO 国际标准，研发国家级标准物质，<br class="d-none-sm" />
           为临床队列研究提供可靠的多组学数据质量保障。
         </p>
         <div class="hero-actions">

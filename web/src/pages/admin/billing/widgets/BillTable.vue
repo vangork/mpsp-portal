@@ -16,8 +16,9 @@ const columns = defineVaDataTableColumns([
   { label: '合作者姓名', key: 'contact', sortable: true },
   { label: '样本数量', key: 'sampleCount', sortable: false },
   { label: '订单时间', key: 'createdAt', sortable: false },
-  { label: '状态', key: 'stage', sortable: false },
+  { label: '项目状态', key: 'stage', sortable: false },
   { label: '金额', key: 'price', sortable: false },
+  { label: '财务状态', key: 'status', sortable: false },
   { label: ' ', key: 'actions', align: 'right' },
 ])
 
@@ -94,6 +95,12 @@ const totalPages = computed(() => Math.ceil(props.pagination.total / props.pagin
     <template #cell(price)="{ rowData }">
       <div>
         {{ roundTo(rowData.price, 2) }}
+      </div>
+    </template>
+
+    <template #cell(status)="{ rowData }">
+      <div>
+        {{ rowData.status }}
       </div>
     </template>
 
