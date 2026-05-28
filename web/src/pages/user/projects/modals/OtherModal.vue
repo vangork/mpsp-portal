@@ -98,12 +98,7 @@
         <VaChip v-if="project.stage === STAGES.length - 1" color="success" icon="check_circle" flat>
           已进入测序阶段
         </VaChip>
-        <VaButton
-          v-else-if="project"
-          color="primary"
-          icon="arrow_forward"
-          @click=""
-        >
+        <VaButton v-else-if="project" color="primary" icon="arrow_forward" @click="">
           推进至「{{ STAGES[project.stage + 1]?.label }}」
         </VaButton>
       </div>
@@ -112,8 +107,8 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue"
-import { Project, STAGES, STAGE_STEPS } from "../types"
+import { PropType } from 'vue'
+import { Project, STAGES, STAGE_STEPS } from '../types'
 
 const model = defineModel({
   type: Boolean,
@@ -127,8 +122,10 @@ defineProps({
   },
 })
 
-const priorityColor = (p: string) => ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
-const priorityLabel = (p: string) => ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? ''
+const priorityColor = (p: string) =>
+  ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
+const priorityLabel = (p: string) =>
+  ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? ''
 </script>
 
 <style lang="scss">

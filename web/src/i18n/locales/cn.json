@@ -150,7 +150,7 @@
     "add_receiver": "添加接收人",
     "edit_receiver": "编辑接收人",
     "delete_receiver": "删除接收人",
-    "delete":"删除",
+    "delete": "删除",
     "confirm_delete": "您确定要删除 {name} 吗？"
   },
   "omics": {

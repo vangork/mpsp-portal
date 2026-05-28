@@ -46,7 +46,6 @@ import Timeline from './cards/Timeline.vue'
   </section>
 </template>
 
-
 <style lang="scss" scoped>
 .header-class {
   background: linear-gradient(135deg, #0c2d48 0%, var(--va-primary) 50%, #4a9fe7 100%);

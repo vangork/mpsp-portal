@@ -1,11 +1,6 @@
 import { defineStore } from 'pinia'
-import {
-  getProjects,
-  updateProject,
-} from '../data/pages/projects'
-import { 
-  Project
-} from '../pages/user/projects/types'
+import { getProjects, updateProject } from '../data/pages/projects'
+import { Project } from '../pages/user/projects/types'
 
 export const useProjectsStore = defineStore('projects', {
   state: () => {

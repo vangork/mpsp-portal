@@ -1,11 +1,6 @@
 import { defineStore } from 'pinia'
-import {
-  getAdminProjects,
-  updateAdminProject,
-} from '../data/pages/projects'
-import { 
-  AdminProject
-} from '../pages/admin/projects/types'
+import { getAdminProjects, updateAdminProject } from '../data/pages/projects'
+import { AdminProject } from '../pages/admin/projects/types'
 
 export const useAdminProjectsStore = defineStore('adminProjects', {
   state: () => {

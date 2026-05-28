@@ -32,7 +32,10 @@ const newReceiver = ref<Receiver>({ ...defaultNewReceiver } as Receiver)
 
 const isFormHasUnsavedChanges = computed(() => {
   return Object.keys(newReceiver.value).some((key) => {
-    return newReceiver.value[key as keyof editReceiver] !== (props.receiver ?? defaultNewReceiver)?.[key as keyof editReceiver]
+    return (
+      newReceiver.value[key as keyof editReceiver] !==
+      (props.receiver ?? defaultNewReceiver)?.[key as keyof editReceiver]
+    )
   })
 })
 
@@ -66,7 +69,11 @@ const onSave = () => {
 </script>
 
 <template>
-  <VaForm v-slot="{ isValid }" ref="add-receiver-form" class="flex-col justify-start items-start gap-4 inline-flex w-full">
+  <VaForm
+    v-slot="{ isValid }"
+    ref="add-receiver-form"
+    class="flex-col justify-start items-start gap-4 inline-flex w-full"
+  >
     <div class="self-stretch flex-col justify-start items-start gap-4 flex">
       <div class="flex gap-4 flex-col sm:flex-row w-full">
         <VaInput
@@ -104,7 +111,12 @@ const onSave = () => {
 
       <div class="flex gap-4 w-full">
         <div class="flex items-center w-1/2 mt-4">
-          <VaCheckbox v-model="newReceiver.default" :label="t('contact.default_receiver')" class="w-full" name="default" />
+          <VaCheckbox
+            v-model="newReceiver.default"
+            :label="t('contact.default_receiver')"
+            class="w-full"
+            name="default"
+          />
         </div>
       </div>
 

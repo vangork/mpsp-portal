@@ -1,11 +1,6 @@
 import { defineStore } from 'pinia'
-import { 
-  AdminBill
-} from '../pages/admin/billing/types'
-import { 
-  getAdminBills,
-  updateAdminBill, 
-} from '../data/pages/bills'
+import { AdminBill } from '../pages/admin/billing/types'
+import { getAdminBills, updateAdminBill } from '../data/pages/bills'
 
 export const useAdminBillsStore = defineStore('adminBills', {
   state: () => {

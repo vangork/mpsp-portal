@@ -29,7 +29,13 @@ const onSave = () => {
   emit('save', newItem.value)
 }
 
-const feeRows: { label: string; key: keyof Pick<AdminBill, 'extractionFee' | 'qualityCheckFee' | 'libraryFee' | 'sequencingFee' | 'analysisServiceFee'> }[] = [
+const feeRows: {
+  label: string
+  key: keyof Pick<
+    AdminBill,
+    'extractionFee' | 'qualityCheckFee' | 'libraryFee' | 'sequencingFee' | 'analysisServiceFee'
+  >
+}[] = [
   { label: '核算提取费', key: 'extractionFee' },
   { label: '质检费', key: 'qualityCheckFee' },
   { label: '建库费', key: 'libraryFee' },
@@ -57,40 +63,90 @@ const statusOptions = ref<{ text: string; value: number }[]>([
         <div class="flex w-full sm:w-1/3">
           <div class="align-bottom font-bold">核算提取费</div>
         </div>
-        <VaInput :model-value="newItem.extractionFee.unitPrice" type="number" :label="t('billing.unit_price')" class="w-full sm:w-1/3" />
-        <VaInput :model-value="newItem.extractionFee.totalPrice" type="number" :label="t('billing.total_price')" class="w-full sm:w-1/3" />
+        <VaInput
+          :model-value="newItem.extractionFee.unitPrice"
+          type="number"
+          :label="t('billing.unit_price')"
+          class="w-full sm:w-1/3"
+        />
+        <VaInput
+          :model-value="newItem.extractionFee.totalPrice"
+          type="number"
+          :label="t('billing.total_price')"
+          class="w-full sm:w-1/3"
+        />
       </div>
 
       <div class="flex gap-4 flex-col sm:flex-row w-full">
         <div class="flex w-full sm:w-1/3">
           <div class="align-bottom font-bold">质检费</div>
         </div>
-        <VaInput :model-value="newItem.qualityCheckFee.unitPrice" type="number" :label="t('billing.unit_price')" class="w-full sm:w-1/3" />
-        <VaInput :model-value="newItem.qualityCheckFee.totalPrice" type="number" :label="t('billing.total_price')" class="w-full sm:w-1/3" />
+        <VaInput
+          :model-value="newItem.qualityCheckFee.unitPrice"
+          type="number"
+          :label="t('billing.unit_price')"
+          class="w-full sm:w-1/3"
+        />
+        <VaInput
+          :model-value="newItem.qualityCheckFee.totalPrice"
+          type="number"
+          :label="t('billing.total_price')"
+          class="w-full sm:w-1/3"
+        />
       </div>
 
       <div class="flex gap-4 flex-col sm:flex-row w-full">
         <div class="flex w-full sm:w-1/3">
           <div class="align-bottom font-bold">建库费</div>
         </div>
-        <VaInput :model-value="newItem.libraryFee.unitPrice" type="number" :label="t('billing.unit_price')" class="w-full sm:w-1/3" />
-        <VaInput :model-value="newItem.libraryFee.totalPrice" type="number" :label="t('billing.total_price')" class="w-full sm:w-1/3" />
+        <VaInput
+          :model-value="newItem.libraryFee.unitPrice"
+          type="number"
+          :label="t('billing.unit_price')"
+          class="w-full sm:w-1/3"
+        />
+        <VaInput
+          :model-value="newItem.libraryFee.totalPrice"
+          type="number"
+          :label="t('billing.total_price')"
+          class="w-full sm:w-1/3"
+        />
       </div>
 
       <div class="flex gap-4 flex-col sm:flex-row w-full">
         <div class="flex w-full sm:w-1/3">
           <div class="align-bottom font-bold">测序费</div>
         </div>
-        <VaInput :model-value="newItem.sequencingFee.unitPrice" type="number" :label="t('billing.unit_price')" class="w-full sm:w-1/3" />
-        <VaInput :model-value="newItem.sequencingFee.totalPrice" type="number" :label="t('billing.total_price')" class="w-full sm:w-1/3" />
+        <VaInput
+          :model-value="newItem.sequencingFee.unitPrice"
+          type="number"
+          :label="t('billing.unit_price')"
+          class="w-full sm:w-1/3"
+        />
+        <VaInput
+          :model-value="newItem.sequencingFee.totalPrice"
+          type="number"
+          :label="t('billing.total_price')"
+          class="w-full sm:w-1/3"
+        />
       </div>
 
       <div class="flex gap-4 flex-col sm:flex-row w-full">
         <div class="flex w-full sm:w-1/3">
           <div class="align-bottom font-bold">个性化数据分析费</div>
         </div>
-        <VaInput :model-value="newItem.analysisServiceFee.unitPrice" type="number" :label="t('billing.unit_price')" class="w-full sm:w-1/3" />
-        <VaInput :model-value="newItem.analysisServiceFee.totalPrice" type="number" :label="t('billing.total_price')" class="w-full sm:w-1/3" />
+        <VaInput
+          :model-value="newItem.analysisServiceFee.unitPrice"
+          type="number"
+          :label="t('billing.unit_price')"
+          class="w-full sm:w-1/3"
+        />
+        <VaInput
+          :model-value="newItem.analysisServiceFee.totalPrice"
+          type="number"
+          :label="t('billing.total_price')"
+          class="w-full sm:w-1/3"
+        />
       </div>
 
       <div class="flex gap-4 flex-col sm:flex-row w-full">
@@ -98,7 +154,7 @@ const statusOptions = ref<{ text: string; value: number }[]>([
           <div class="align-bottom font-bold">总金额</div>
         </div>
         <VaInput model-value="0" type="number" :label="t('billing.unit_price')" readonly class="w-full sm:w-1/3" />
-        <div class="flex w-full sm:w-1/3" style="min-width: 181.33px;">
+        <div class="flex w-full sm:w-1/3" style="min-width: 181.33px">
           <div class="align-bottom-0">
             <VaButton preset="primary" @click="">下载报价单</VaButton>
           </div>

@@ -1,7 +1,6 @@
 import { Receiver } from '../../pages/admin/config/types'
 import api, { error } from '../../services/api'
 
-
 export const getReceivers = async () => {
   const response = await fetch(api.allReceivers())
   if (!response.ok) {

@@ -6,7 +6,6 @@ import { PROJECT_SAMPLES } from '../../../data/pages/projects'
 import ExtractionModal from './modals/ExtractionModal.vue'
 import OtherModal from './modals/OtherModal.vue'
 
-
 const projects = ref<Project[]>(PROJECT_SAMPLES)
 
 const selectedProject = ref<Project | null>(null)
@@ -33,8 +32,10 @@ const openProject = (project: Project) => {
 
 const projectsByStage = (stageIndex: number) => projects.value.filter((p) => p.stage === stageIndex)
 
-const priorityColor = (p: string) => ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
-const priorityLabel = (p: string) => ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? '未设置'
+const priorityColor = (p: string) =>
+  ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
+const priorityLabel = (p: string) =>
+  ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? '未设置'
 
 const totalProjects = computed(() => projects.value.length)
 const sequencingProjects = computed(() => projects.value.filter((p) => p.stage === 5).length)
@@ -51,7 +52,13 @@ const inProgressProjects = computed(() => projects.value.filter((p) => p.stage >
             <VaIcon :name="stage.icon" size="1rem" :color="stage.color" />
             <span class="legend-label">{{ stage.label }}</span>
           </div>
-          <VaIcon v-if="idx < STAGES.length - 1" name="chevron_right" size="1rem" color="secondary" class="legend-arrow" />
+          <VaIcon
+            v-if="idx < STAGES.length - 1"
+            name="chevron_right"
+            size="1rem"
+            color="secondary"
+            class="legend-arrow"
+          />
         </template>
       </div>
     </VaCard>
@@ -94,9 +101,7 @@ const inProgressProjects = computed(() => projects.value.filter((p) => p.stage >
                 <VaChip size="small" :color="stage.color" flat icon="science">
                   {{ project.sampleType }}
                 </VaChip>
-                <VaChip size="small" color="secondary" flat icon="biotech">
-                  {{ project.sampleCount }} 份
-                </VaChip>
+                <VaChip size="small" color="secondary" flat icon="biotech"> {{ project.sampleCount }} 份 </VaChip>
               </div>
 
               <VaDivider style="margin: 8px 0 6px" />
@@ -287,7 +292,9 @@ const inProgressProjects = computed(() => projects.value.filter((p) => p.stage >
   // border: 1px solid #ccc;
   // padding: 3px;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 
   &:hover {
     transform: translateY(-2px);

@@ -243,11 +243,7 @@ onMounted(async () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    v-for="(sample, index) in samples"
-                    :key="sample.id"
-                    :class="{ 'example-row': index === 0 }"
-                  >
+                  <tr v-for="(sample, index) in samples" :key="sample.id" :class="{ 'example-row': index === 0 }">
                     <td class="col-id">
                       <span class="id-badge">{{ sample.id }}</span>
                     </td>
@@ -598,7 +594,9 @@ $input-focus: rgba(79, 195, 247, 0.5);
     padding: 11px 14px;
     font-size: 0.95rem;
     font-family: inherit;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
     outline: none;
     &::placeholder {
       color: rgba(255, 255, 255, 0.3);
@@ -685,7 +683,10 @@ $input-focus: rgba(79, 195, 247, 0.5);
     font-size: 0.85rem;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s,
+      background 0.2s;
     &::placeholder {
       color: rgba(255, 255, 255, 0.25);
     }
@@ -722,18 +723,43 @@ $input-focus: rgba(79, 195, 247, 0.5);
 }
 
 // column widths
-.col-id       { width: 56px; }
-.col-name     { min-width: 140px; }
-.col-type     { min-width: 130px; }
-.col-species  { min-width: 100px; }
-.col-tube     { min-width: 90px; }
-.col-conc     { min-width: 110px; }
-.col-vol      { min-width: 90px; }
-.col-test     { min-width: 200px; }
-.col-platform { min-width: 200px; }
-.col-group    { min-width: 130px; }
-.col-remark   { min-width: 140px; }
-.col-action   { width: 48px; text-align: center; }
+.col-id {
+  width: 56px;
+}
+.col-name {
+  min-width: 140px;
+}
+.col-type {
+  min-width: 130px;
+}
+.col-species {
+  min-width: 100px;
+}
+.col-tube {
+  min-width: 90px;
+}
+.col-conc {
+  min-width: 110px;
+}
+.col-vol {
+  min-width: 90px;
+}
+.col-test {
+  min-width: 200px;
+}
+.col-platform {
+  min-width: 200px;
+}
+.col-group {
+  min-width: 130px;
+}
+.col-remark {
+  min-width: 140px;
+}
+.col-action {
+  width: 48px;
+  text-align: center;
+}
 
 .id-badge {
   display: inline-flex;
@@ -1022,7 +1048,9 @@ code {
 .dialog-fade-leave-active {
   transition: opacity 0.2s ease;
   .dialog-box {
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
   }
 }
 .dialog-fade-enter-from,

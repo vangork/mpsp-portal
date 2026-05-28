@@ -89,7 +89,12 @@ onMounted(() => {
         <VaButton @click="showAddReceiverModal">{{ t('contact.add_receiver') }}</VaButton>
       </div>
 
-      <ReceiversTable :receivers="receiversStore.items" :loading="receiversStore.loading" @edit-receiver="showEditReceiverModal" @delete-receiver="showDeleteReceiverModal" />
+      <ReceiversTable
+        :receivers="receiversStore.items"
+        :loading="receiversStore.loading"
+        @editReceiver="showEditReceiverModal"
+        @deleteReceiver="showDeleteReceiverModal"
+      />
     </VaCardContent>
   </VaCard>
 

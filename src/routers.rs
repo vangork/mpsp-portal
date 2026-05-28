@@ -7,8 +7,7 @@ pub fn config(cfg: &mut web::ServiceConfig) {
         web::scope("/api")
             .service(
                 web::scope("/default_receiver").service(
-                    web::resource("")
-                        .route(web::get().to(receiver::get_default_receiver))
+                    web::resource("").route(web::get().to(receiver::get_default_receiver)),
                 ),
             )
             .service(
@@ -47,35 +46,36 @@ pub fn config(cfg: &mut web::ServiceConfig) {
                                     .route(web::get().to(receiver::list_receivers))
                                     .route(web::post().to(receiver::add_receiver)),
                             )
-                            .service(web::scope("/{receiver_id}").service(
-                                web::resource("")
-                                    .route(web::put().to(receiver::update_receiver))
-                                    .route(web::delete().to(receiver::delete_receiver)),
-                            )),
-                    )
-            )
-            // .service(
-            //     web::scope("/omics")
-            //         .wrap(api_auth::CheckLogin)
-            //         .service(web::resource("/token").route(web::get().to(omics::oss_token)))
-            //         .service(
-            //             web::scope("/quartet")
-            //                 .service(
-            //                     web::scope("/dna")
-            //                         .service(
-            //                             web::resource("")
-            //                                 .route(web::post().to(omics::add_dna))
-            //                                 .route(web::get().to(omics::list_dna)),
-            //                         )
-            //                         .service(
-            //                             web::resource("/report")
-            //                                 .route(web::post().to(omics::generate_dna_report)),
-            //                         )
-            //                         .service(web::scope("/{dna_id}").service(
-            //                             web::resource("").route(web::put().to(omics::update_dna)),
-            //                         )),
-            //                 )
-            //         )
-            // ),
+                            .service(
+                                web::scope("/{receiver_id}").service(
+                                    web::resource("")
+                                        .route(web::put().to(receiver::update_receiver))
+                                        .route(web::delete().to(receiver::delete_receiver)),
+                                ),
+                            ),
+                    ),
+            ), // .service(
+               //     web::scope("/omics")
+               //         .wrap(api_auth::CheckLogin)
+               //         .service(web::resource("/token").route(web::get().to(omics::oss_token)))
+               //         .service(
+               //             web::scope("/quartet")
+               //                 .service(
+               //                     web::scope("/dna")
+               //                         .service(
+               //                             web::resource("")
+               //                                 .route(web::post().to(omics::add_dna))
+               //                                 .route(web::get().to(omics::list_dna)),
+               //                         )
+               //                         .service(
+               //                             web::resource("/report")
+               //                                 .route(web::post().to(omics::generate_dna_report)),
+               //                         )
+               //                         .service(web::scope("/{dna_id}").service(
+               //                             web::resource("").route(web::put().to(omics::update_dna)),
+               //                         )),
+               //                 )
+               //         )
+               // ),
     );
 }

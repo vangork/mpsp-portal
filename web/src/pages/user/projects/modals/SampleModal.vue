@@ -34,22 +34,12 @@
         </div>
       </div>
 
-      <SampleDetailsModal
-        v-model="showSamplesModal"
-        :samples="editSamples"
-        @update:samples="editSamples = $event"
-      />
+      <SampleDetailsModal v-model="showSamplesModal" :samples="editSamples" @update:samples="editSamples = $event" />
 
       <VaDivider />
 
       <div class="detail-grid">
-        <VaSelect
-          v-model="editPriority"
-          label="优先级"
-          :options="priorityOptions"
-          value-by="value"
-          text-by="label"
-        />
+        <VaSelect v-model="editPriority" label="优先级" :options="priorityOptions" value-by="value" text-by="label" />
       </div>
 
       <div class="detail-grid">
@@ -103,31 +93,19 @@
     </div>
 
     <div class="flex justify-end mt-2 gap-2">
-      <VaButton
-        preset="secondary"
-        color="secondary"
-        @click="model = false"
-      >
-        取消
+      <VaButton preset="secondary" color="secondary" @click="model = false"> 取消 </VaButton>
+      <VaButton preset="primary" @click="model = false"> 确认 </VaButton>
+      <VaButton color="primary" icon="arrow_forward" @click="">
+        推进至「{{ STAGES[project.stage + 1]?.label }}」
       </VaButton>
-      <VaButton preset="primary" @click="model = false">
-        确认
-      </VaButton>
-      <VaButton
-          color="primary"
-          icon="arrow_forward"
-          @click=""
-        >
-          推进至「{{ STAGES[project.stage + 1]?.label }}」
-        </VaButton>
     </div>
   </VaModal>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, PropType } from "vue"
-import { Project, SampleEntry, STAGES, STAGE_STEPS } from "../types"
-import SampleDetailsModal from "./SampleDetailsModal.vue"
+import { ref, watch, PropType } from 'vue'
+import { Project, SampleEntry, STAGES, STAGE_STEPS } from '../types'
+import SampleDetailsModal from './SampleDetailsModal.vue'
 
 const model = defineModel({
   type: Boolean,
@@ -142,7 +120,27 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'save', updated: Pick<Project, 'id' | 'institution' | 'contact' | 'phone' | 'email' | 'receiverName' | 'receiverAddress' | 'receiverPhone' | 'receiverEmail' | 'priority' | 'samples' | 'processType' | 'nucleicAcidOperator' | 'libraryOperator' | 'sequencingOperator'>): void
+  (
+    e: 'save',
+    updated: Pick<
+      Project,
+      | 'id'
+      | 'institution'
+      | 'contact'
+      | 'phone'
+      | 'email'
+      | 'receiverName'
+      | 'receiverAddress'
+      | 'receiverPhone'
+      | 'receiverEmail'
+      | 'priority'
+      | 'samples'
+      | 'processType'
+      | 'nucleicAcidOperator'
+      | 'libraryOperator'
+      | 'sequencingOperator'
+    >,
+  ): void
 }>()
 
 const editInstitution = ref('')
@@ -160,19 +158,21 @@ const editLibraryOperator = ref('')
 const editSequencingOperator = ref('')
 const confirmationEmails = ref<File[]>([])
 
-const editSamples = ref<SampleEntry[]>([{
-  id: 1,
-  originalName: '',
-  sampleType: '',
-  species: '',
-  tubeCount: '',
-  concentration: '',
-  volume: '',
-  testItem: '',
-  platform: '',
-  grouping: '',
-  remark: ''
-}])
+const editSamples = ref<SampleEntry[]>([
+  {
+    id: 1,
+    originalName: '',
+    sampleType: '',
+    species: '',
+    tubeCount: '',
+    concentration: '',
+    volume: '',
+    testItem: '',
+    platform: '',
+    grouping: '',
+    remark: '',
+  },
+])
 const showSamplesModal = ref(false)
 
 const priorityOptions = [
@@ -183,14 +183,11 @@ const priorityOptions = [
 
 const processTypeOptions = [
   { label: '核酸提取流程', value: 'nucleicAcid' as const },
-  { label: '建库流程',     value: 'library'     as const },
-  { label: '测序流程',     value: 'sequencing'  as const },
+  { label: '建库流程', value: 'library' as const },
+  { label: '测序流程', value: 'sequencing' as const },
 ]
 
-const OPERATOR_OPTIONS = [
-  '张工', '李工', '王工', '赵工', '陈工',
-  '刘工', '吴工', '孙工', '周工', '郑工',
-]
+const OPERATOR_OPTIONS = ['张工', '李工', '王工', '赵工', '陈工', '刘工', '吴工', '孙工', '周工', '郑工']
 
 watch(
   () => props.project,
@@ -236,8 +233,10 @@ const handleSave = () => {
   model.value = false
 }
 
-const priorityColor = (p: string) => ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
-const priorityLabel = (p: string) => ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? ''
+const priorityColor = (p: string) =>
+  ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
+const priorityLabel = (p: string) =>
+  ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? ''
 </script>
 
 <style lang="scss">
@@ -282,7 +281,9 @@ const priorityLabel = (p: string) => ({ high: '高优先级', medium: '中优先
 
   &--clickable {
     cursor: pointer;
-    transition: background 0.15s, box-shadow 0.15s;
+    transition:
+      background 0.15s,
+      box-shadow 0.15s;
 
     &:hover {
       background: var(--va-background-secondary);

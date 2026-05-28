@@ -22,7 +22,10 @@ pub async fn list_receivers(pool: Data<Pool>) -> Result<HttpResponse> {
     }
 }
 
-pub async fn add_receiver(Json(receiver): Json<NewReceiver>, pool: Data<Pool>) -> Result<HttpResponse> {
+pub async fn add_receiver(
+    Json(receiver): Json<NewReceiver>,
+    pool: Data<Pool>,
+) -> Result<HttpResponse> {
     let mut conn = pool
         .get()
         .await

@@ -36,7 +36,6 @@ const emit = defineEmits<{
 
 const items = toRef(props, 'items')
 
-
 const totalPages = computed(() => Math.ceil(props.pagination.total / props.pagination.perPage))
 </script>
 

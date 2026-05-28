@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, computed, ref, toRef } from 'vue'
+import { PropType, ref, toRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { defineVaDataTableColumns } from 'vuestic-ui'
 import { Receiver } from '../types'
@@ -12,8 +12,8 @@ const columns = defineVaDataTableColumns([
   { label: t('contact.address'), key: 'address', sortable: false },
   { label: t('contact.phone'), key: 'phone', sortable: false },
   { label: t('contact.email'), key: 'email', sortable: false },
-	{ label: t('contact.default_receiver'), key: 'default', sortable: false },
-	{ label: ' ', key: 'actions', align: 'right' },
+  { label: t('contact.default_receiver'), key: 'default', sortable: false },
+  { label: ' ', key: 'actions', align: 'right' },
 ])
 
 const props = defineProps({
@@ -26,12 +26,11 @@ const props = defineProps({
 
 const emit = defineEmits<{
   (event: 'edit-receiver', receiver: Receiver): void
-	(event: 'delete-receiver', receiver: Receiver): void
+  (event: 'delete-receiver', receiver: Receiver): void
 }>()
 
 const receivers = toRef(props, 'receivers')
 const yes = ref(true)
-
 </script>
 
 <template>
@@ -68,7 +67,7 @@ const yes = ref(true)
 
     <template #cell(default)="{ rowData }">
       <div class="ellipsis max-w-[230px]">
-        <VaCheckbox v-if="rowData.default" color="info" v-model="yes" readonly/>
+        <VaCheckbox v-if="rowData.default" v-model="yes" color="info" readonly />
       </div>
     </template>
 

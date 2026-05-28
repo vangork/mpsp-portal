@@ -56,10 +56,10 @@ const achievements = [
           <span class="brand-name">MPSP <span class="brand-highlight">Portal</span></span>
         </div>
         <div class="nav-links">
-          <router-link :to="{ hash: '#about' }">平台简介</router-link>
-          <router-link :to="{ hash: '#capabilities' }">核心能力</router-link>
-          <router-link :to="{ hash: '#achievements' }">科研成果</router-link>
-          <router-link :to="{ hash: '#contact' }">联系我们</router-link>
+          <RouterLink :to="{ hash: '#about' }">平台简介</RouterLink>
+          <RouterLink :to="{ hash: '#capabilities' }">核心能力</RouterLink>
+          <RouterLink :to="{ hash: '#achievements' }">科研成果</RouterLink>
+          <RouterLink :to="{ hash: '#contact' }">联系我们</RouterLink>
         </div>
       </div>
     </nav>
@@ -82,7 +82,8 @@ const achievements = [
           平台
         </h1>
         <p class="hero-sub">
-          (Molecular Phenotyping Sequencing Platform)以<strong>标准化</strong>为核心竞争力，制定 ISO 国际标准，研发国家级标准物质，<br class="d-none-sm" />
+          (Molecular Phenotyping Sequencing Platform)以<strong>标准化</strong>为核心竞争力，制定 ISO
+          国际标准，研发国家级标准物质，<br class="d-none-sm" />
           为临床队列研究提供可靠的多组学数据质量保障。
         </p>
         <div class="hero-actions">
@@ -90,10 +91,10 @@ const achievements = [
             <i class="fas fa-sign-in-alt"></i>
             {{ authStore.isLoggedIn ? t('auth.open_dashboard') : t('auth.login') }}
           </button>
-          <router-link :to="{ hash: '#about' }" class="btn-ghost">
+          <RouterLink :to="{ hash: '#about' }" class="btn-ghost">
             <i class="fas fa-chevron-down"></i>
             了解更多
-          </router-link>
+          </RouterLink>
         </div>
       </div>
       <div class="hero-visual">
@@ -117,7 +118,8 @@ const achievements = [
             是具备全流程标准化基因组与转录组数据生产与分析能力的技术平台，覆盖从样本制备到生物信息解读的全环节。
           </p>
           <p>
-            平台以“标准化”为核心竞争力，主导制定 <strong>ISO/TS 22690:2021</strong> 国际标准，自主研发 <strong>8 项</strong>
+            平台以“标准化”为核心竞争力，主导制定 <strong>ISO/TS 22690:2021</strong> 国际标准，自主研发
+            <strong>8 项</strong>
             国家级标准物质，发表 10 余篇顶级期刊论文，包括
             <em>Nature Biotechnology</em>、<em>Genome Biology</em>、<em>Nature Cancer</em> 等。
           </p>
@@ -133,10 +135,7 @@ const achievements = [
           <div class="featured-project">
             <div class="project-badge">Nature Cancer</div>
             <h3>中国乳腺癌基因组图谱（CBCGA）</h3>
-            <p>
-              支持邵志敏教授团队完成中国最大规模乳腺癌多组学自然队列研究，
-              为乳腺癌精准诊疗提供重要基因组数据支撑。
-            </p>
+            <p>支持邵志敏教授团队完成中国最大规模乳腺癌多组学自然队列研究， 为乳腺癌精准诊疗提供重要基因组数据支撑。</p>
             <div class="project-meta">
               <span><i class="fas fa-user"></i> 邵志敏教授团队</span>
               <span><i class="fas fa-database"></i> 最大中国乳腺癌多组学队列</span>
@@ -581,7 +580,8 @@ $radius: 16px;
     line-height: 1.8;
     margin-bottom: 16px;
     font-size: 1rem;
-    strong, em {
+    strong,
+    em {
       color: white;
     }
   }
@@ -851,23 +851,47 @@ $radius: 16px;
 
 // ── animations ──
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes fadeInLeft {
-  from { opacity: 0; transform: translateX(-28px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 @keyframes drift {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(40px, 30px) scale(1.08); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(40px, 30px) scale(1.08);
+  }
 }
 
 // ── responsive ──

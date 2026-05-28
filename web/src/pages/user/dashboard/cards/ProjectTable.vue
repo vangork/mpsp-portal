@@ -23,7 +23,6 @@ const projectsStore = useProjectsStore()
 onMounted(async () => {
   await projectsStore.refreshProjects()
 })
-
 </script>
 
 <template>
@@ -34,11 +33,7 @@ onMounted(async () => {
     </VaCardTitle>
     <VaCardContent>
       <div v-if="projectsStore.projects.length > 0">
-        <VaDataTable
-          :items="projectsStore.projects.slice(0, 6)"
-          :columns="columns"
-          :loading="projectsStore.loading"
-        >
+        <VaDataTable :items="projectsStore.projects.slice(0, 6)" :columns="columns" :loading="projectsStore.loading">
           <template #cell(id)="{ rowData }">
             {{ rowData.id }}
           </template>
@@ -54,7 +49,7 @@ onMounted(async () => {
           </template>
           <template #cell(count)="{ rowData }">
             <!-- <VaAvatarGroup size="small" :options="getTeamOptions(project.team)" :max="2" /> -->
-             {{ rowData.sampleCount }}
+            {{ rowData.sampleCount }}
           </template>
           <template #cell(stage)="{ rowData }">
             <VaBadge :text="STAGES[rowData.stage]?.label || '未知'" :color="STAGES[rowData.stage]?.color || 'dark'" />

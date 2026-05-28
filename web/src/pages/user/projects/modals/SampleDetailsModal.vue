@@ -26,7 +26,7 @@
               <th class="col-platform">测序平台</th>
               <th class="col-group">分组情况</th>
               <th class="col-remark">备注</th>
-              <th v-if="!readonly"class="col-action"></th>
+              <th v-if="!readonly" class="col-action"></th>
             </tr>
           </thead>
           <tbody>
@@ -50,10 +50,22 @@
                 <VaInput v-model="row.species" :readonly="readonly" placeholder="物种" class="cell-input" />
               </td>
               <td class="col-tube">
-                <VaInput v-model="row.tubeCount" :readonly="readonly" type="number" placeholder="管数" class="cell-input" />
+                <VaInput
+                  v-model="row.tubeCount"
+                  :readonly="readonly"
+                  type="number"
+                  placeholder="管数"
+                  class="cell-input"
+                />
               </td>
               <td class="col-conc">
-                <VaInput v-model="row.concentration" :readonly="readonly" type="number" placeholder="ng/μL" class="cell-input" />
+                <VaInput
+                  v-model="row.concentration"
+                  :readonly="readonly"
+                  type="number"
+                  placeholder="ng/μL"
+                  class="cell-input"
+                />
               </td>
               <td class="col-vol">
                 <VaInput v-model="row.volume" :readonly="readonly" type="number" placeholder="μL" class="cell-input" />
@@ -71,19 +83,18 @@
                 <VaInput v-model="row.platform" :readonly="readonly" placeholder="测序平台" class="cell-input" />
               </td>
               <td class="col-group">
-                <VaInput v-model="row.grouping" :readonly="readonly" placeholder="如：对照组/实验组" class="cell-input" />
+                <VaInput
+                  v-model="row.grouping"
+                  :readonly="readonly"
+                  placeholder="如：对照组/实验组"
+                  class="cell-input"
+                />
               </td>
               <td class="col-remark">
                 <VaInput v-model="row.remark" :readonly="readonly" placeholder="备注" class="cell-input" />
               </td>
               <td v-if="!readonly" class="col-action">
-                <VaButton
-                  icon="delete"
-                  color="danger"
-                  preset="plain"
-                  size="small"
-                  @click="removeRow(idx)"
-                />
+                <VaButton icon="delete" color="danger" preset="plain" size="small" @click="removeRow(idx)" />
               </td>
             </tr>
             <tr v-if="localSamples.length === 0">
@@ -99,27 +110,17 @@
 
     <template #footer>
       <div v-if="!readonly" class="sd-footer">
-        <VaButton  icon="add" preset="secondary" @click="addRow">添加样本条目</VaButton>
+        <VaButton icon="add" preset="secondary" @click="addRow">添加样本条目</VaButton>
         <div class="sd-footer-right">
           <!-- <span class="sd-count">共 {{ localSamples.length }} 条</span>
           <VaButton color="primary" icon="save" @click="handleSave">保存并关闭</VaButton> -->
-          <VaButton
-            preset="secondary"
-            color="secondary"
-            @click="model = false"
-          >
-            取消
-          </VaButton>
-          <VaButton preset="primary" @click="model = false">
-            确认
-          </VaButton>
+          <VaButton preset="secondary" color="secondary" @click="model = false"> 取消 </VaButton>
+          <VaButton preset="primary" @click="model = false"> 确认 </VaButton>
         </div>
       </div>
       <div v-else class="sd-footer">
         <div></div>
-        <VaButton preset="primary" @click="model = false">
-          好的
-        </VaButton>
+        <VaButton preset="primary" @click="model = false"> 好的 </VaButton>
       </div>
     </template>
   </VaModal>
@@ -131,7 +132,7 @@ import { SampleEntry, SAMPLE_TYPE_OPTIONS, TEST_ITEM_OPTIONS } from '../types'
 
 const model = defineModel({ type: Boolean, required: true })
 
-const props = defineProps({ 
+const props = defineProps({
   samples: {
     type: Object as PropType<SampleEntry[]>,
     required: true,
@@ -139,7 +140,7 @@ const props = defineProps({
   readonly: {
     type: Boolean,
     default: false,
-  }
+  },
 })
 const emit = defineEmits<{ (e: 'update:samples', val: SampleEntry[]): void }>()
 
@@ -176,7 +177,10 @@ const removeRow = (idx: number) => {
 }
 
 const handleSave = () => {
-  emit('update:samples', localSamples.value.map((x) => ({ ...x })))
+  emit(
+    'update:samples',
+    localSamples.value.map((x) => ({ ...x })),
+  )
   model.value = false
 }
 </script>
@@ -265,18 +269,44 @@ const handleSave = () => {
   }
 }
 
-.col-idx      { width: 48px; text-align: center; }
-.col-name     { min-width: 130px; }
-.col-type     { min-width: 130px; }
-.col-species  { min-width: 90px; }
-.col-tube     { min-width: 70px; }
-.col-conc     { min-width: 100px; }
-.col-vol      { min-width: 80px; }
-.col-test     { min-width: 180px; }
-.col-platform { min-width: 110px; }
-.col-group    { min-width: 120px; }
-.col-remark   { min-width: 110px; }
-.col-action   { width: 44px; text-align: center; }
+.col-idx {
+  width: 48px;
+  text-align: center;
+}
+.col-name {
+  min-width: 130px;
+}
+.col-type {
+  min-width: 130px;
+}
+.col-species {
+  min-width: 90px;
+}
+.col-tube {
+  min-width: 70px;
+}
+.col-conc {
+  min-width: 100px;
+}
+.col-vol {
+  min-width: 80px;
+}
+.col-test {
+  min-width: 180px;
+}
+.col-platform {
+  min-width: 110px;
+}
+.col-group {
+  min-width: 120px;
+}
+.col-remark {
+  min-width: 110px;
+}
+.col-action {
+  width: 44px;
+  text-align: center;
+}
 
 .empty-row {
   text-align: center;

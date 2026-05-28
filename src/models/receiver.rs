@@ -1,5 +1,6 @@
 use crate::db::Connection;
 use crate::schema::receivers;
+use crate::utils::to_ascii_lowercase;
 use chrono::NaiveDateTime;
 use diesel::{Identifiable, Insertable, Queryable, prelude::*};
 use diesel_async::RunQueryDsl;
@@ -14,6 +15,7 @@ pub struct Receiver {
     #[serde(rename = "institution")]
     pub address: String,
     pub phone: String,
+    #[serde(deserialize_with = "to_ascii_lowercase")]
     pub email: String,
     pub default: bool,
     pub created_at: NaiveDateTime,
@@ -31,18 +33,6 @@ pub struct NewReceiver {
     pub default: bool,
 }
 
-impl NewReceiver {
-    pub fn new(name: &str, address: &str, phone: &str, email: &str, default: bool) -> Self {
-        Self {
-            name: name.to_string(),
-            address: address.to_string(),
-            phone: phone.to_string(),
-            email: email.to_ascii_lowercase(),
-            default: default,
-        }
-    }
-}
-
 impl Receiver {
     pub async fn add_new_receiver(
         receiver: NewReceiver,
@@ -54,8 +44,14 @@ impl Receiver {
             .await
     }
 
-    pub async fn find_receiver_by_id(receiver_id: i32, conn: &mut Connection) -> QueryResult<Receiver> {
-        receivers::table.find(receiver_id).get_result::<Receiver>(conn).await
+    pub async fn find_receiver_by_id(
+        receiver_id: i32,
+        conn: &mut Connection,
+    ) -> QueryResult<Receiver> {
+        receivers::table
+            .find(receiver_id)
+            .get_result::<Receiver>(conn)
+            .await
     }
 
     pub async fn update_receiver(
@@ -101,8 +97,13 @@ impl Receiver {
         Ok(receiver)
     }
 
-    pub async fn delete_receiver(receiver_id: i32, conn: &mut Connection) -> Result<(), diesel::result::Error> {
-        diesel::delete(receivers::table.find(receiver_id)).execute(conn).await?;
+    pub async fn delete_receiver(
+        receiver_id: i32,
+        conn: &mut Connection,
+    ) -> Result<(), diesel::result::Error> {
+        diesel::delete(receivers::table.find(receiver_id))
+            .execute(conn)
+            .await?;
         Ok(())
     }
 }

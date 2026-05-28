@@ -1,5 +1,5 @@
 use actix_web::cookie::Key;
-use base64::{engine::general_purpose::STANDARD as BASE64, Engine};
+use base64::{Engine, engine::general_purpose::STANDARD as BASE64};
 
 fn main() {
     let key = Key::generate();

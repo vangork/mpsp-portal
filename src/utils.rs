@@ -11,6 +11,14 @@ where
     Ok(DateTime::<Utc>::deserialize(d)?.naive_utc())
 }
 
+pub fn to_ascii_lowercase<'de, D>(deserializer: D) -> Result<String, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    Ok(s.to_ascii_lowercase())
+}
+
 pub fn get_secret_key() -> Vec<u8> {
     let secret_key_base64 = env::var("SECRET_KEY").expect("SECRET_KEY is not set in .env file");
     general_purpose::STANDARD

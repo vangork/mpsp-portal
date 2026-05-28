@@ -5,7 +5,7 @@
         <VaIcon name="folder_open" size="1.4rem" color="primary" />
         <div>
           <div class="modal-title">{{ STAGES[project.stage].label }} · {{ project.id }}</div>
-          <div class="modal-subtitle">{{ project.createdAt }} </div>
+          <div class="modal-subtitle">{{ project.createdAt }}</div>
         </div>
 
         <VaChip size="small" :color="priorityColor(project.priority)" outline>
@@ -106,31 +106,19 @@
     />
 
     <div class="flex justify-end mt-2 gap-2">
-      <VaButton
-        preset="secondary"
-        color="secondary"
-        @click="model = false"
-      >
-        取消
+      <VaButton preset="secondary" color="secondary" @click="model = false"> 取消 </VaButton>
+      <VaButton preset="primary" @click="model = false"> 确认 </VaButton>
+      <VaButton color="primary" icon="arrow_forward" @click="">
+        推进至「{{ STAGES[project.stage + 1]?.label }}」
       </VaButton>
-      <VaButton preset="primary" @click="model = false">
-        确认
-      </VaButton>
-      <VaButton
-          color="primary"
-          icon="arrow_forward"
-          @click=""
-        >
-          推进至「{{ STAGES[project.stage + 1]?.label }}」
-        </VaButton>
     </div>
   </VaModal>
 </template>
 
 <script lang="ts" setup>
-import { PropType, ref } from "vue"
-import { Project, SampleEntry, STAGES } from "../types"
-import SampleDetailsModal from "./SampleDetailsModal.vue"
+import { PropType, ref } from 'vue'
+import { Project, SampleEntry, STAGES } from '../types'
+import SampleDetailsModal from './SampleDetailsModal.vue'
 
 const model = defineModel({
   type: Boolean,
@@ -147,22 +135,26 @@ defineProps({
 const showSamplesModal = ref(false)
 const extractionPhotos = ref<File[]>([])
 const qcReports = ref<File[]>([])
-const editSamples = ref<SampleEntry[]>([{
-  id: 1,
-  originalName: '',
-  sampleType: '',
-  species: '',
-  tubeCount: '',
-  concentration: '',
-  volume: '',
-  testItem: '',
-  platform: '',
-  grouping: '',
-  remark: ''
-}])
+const editSamples = ref<SampleEntry[]>([
+  {
+    id: 1,
+    originalName: '',
+    sampleType: '',
+    species: '',
+    tubeCount: '',
+    concentration: '',
+    volume: '',
+    testItem: '',
+    platform: '',
+    grouping: '',
+    remark: '',
+  },
+])
 
-const priorityColor = (p: string) => ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
-const priorityLabel = (p: string) => ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? ''
+const priorityColor = (p: string) =>
+  ({ high: 'danger', medium: 'warning', low: 'success' })[p as 'high' | 'medium' | 'low'] ?? 'secondary'
+const priorityLabel = (p: string) =>
+  ({ high: '高优先级', medium: '中优先级', low: '低优先级' })[p as 'high' | 'medium' | 'low'] ?? ''
 </script>
 
 <style lang="scss">
@@ -207,7 +199,9 @@ const priorityLabel = (p: string) => ({ high: '高优先级', medium: '中优先
 
   &--clickable {
     cursor: pointer;
-    transition: background 0.15s, box-shadow 0.15s;
+    transition:
+      background 0.15s,
+      box-shadow 0.15s;
 
     &:hover {
       background: var(--va-background-secondary);
