@@ -1,6 +1,17 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
+    config (id) {
+        id -> Integer,
+        #[max_length = 128]
+        key -> Varchar,
+        value -> Text,
+        created_at -> Timestamp,
+        updated_at -> Timestamp,
+    }
+}
+
+diesel::table! {
     receivers (id) {
         id -> Integer,
         #[max_length = 128]
@@ -36,4 +47,4 @@ diesel::table! {
     }
 }
 
-diesel::allow_tables_to_appear_in_same_query!(receivers, users,);
+diesel::allow_tables_to_appear_in_same_query!(config, receivers, users,);

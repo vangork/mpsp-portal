@@ -34,11 +34,15 @@ const showDeleteReceiverModal = (receiver: Receiver) => {
 }
 
 const onReceiverSaved = async (receiver: Receiver, ok: () => void) => {
-  error.value = null
-  if (receiverToEdit.value) {
-    await receiversStore.update(receiver)
-  } else {
-    await receiversStore.add(receiver)
+  try {
+    error.value = null
+    if (receiverToEdit.value) {
+      await receiversStore.update(receiver)
+    } else {
+      await receiversStore.add(receiver)
+    }
+  } catch (err) {
+    error.value = err instanceof Error ? `${err.name}: ${err.message}` : String(err)
   }
   if (!error.value) {
     ok()
@@ -46,9 +50,13 @@ const onReceiverSaved = async (receiver: Receiver, ok: () => void) => {
 }
 
 const onReceiverDeleted = async (ok: () => void) => {
-  error.value = null
-  if (receiverToEdit.value) {
-    await receiversStore.delete(receiverToEdit.value.id)
+  try {
+    error.value = null
+    if (receiverToEdit.value) {
+      await receiversStore.delete(receiverToEdit.value.id)
+    }
+  } catch (err) {
+    error.value = err instanceof Error ? `${err.name}: ${err.message}` : String(err)
   }
   if (!error.value) {
     ok()

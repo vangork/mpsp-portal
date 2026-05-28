@@ -1,0 +1,10 @@
+-- Your SQL goes here
+CREATE TABLE `config` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `key` varchar(128) NOT NULL,
+  `value` text NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE UNIQUE INDEX idx_config ON `config` (`key`);

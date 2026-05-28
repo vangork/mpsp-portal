@@ -101,6 +101,9 @@
     "delete": "Delete",
     "confirm_delete": "Are you sure you want to delete {name}?"
   },
+  "config": {
+    "preview": "Preview"
+  },
   "omics": {
     "add_item": "Add Item",
     "get_report": "Get Report",

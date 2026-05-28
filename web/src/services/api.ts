@@ -45,6 +45,9 @@ export default {
   receiver: (id: number) => `${apiBaseUrl}/api/admin/receivers/${id}`,
   defaultReceiver: () => `${apiBaseUrl}/api/default_receiver`,
 
+  adminConfig: () => `${apiBaseUrl}/api/admin/config`,
+  config: () => `${apiBaseUrl}/api/config`,
+
   adminDnas: () => `${apiBaseUrl}/api/admin/omics/quartet/dna`,
   adminDna: (id: number) => `${apiBaseUrl}/api/admin/omics/quartet/dna/${id}`,
   adminDnaVcf: (id: number) => `${apiBaseUrl}/api/admin/omics/quartet/dna/${id}/vcf`,

@@ -1,4 +1,4 @@
-use crate::handlers::{auth, receiver, user};
+use crate::handlers::{auth, config, receiver, user};
 use crate::middlewares::api_auth;
 use actix_web::web;
 
@@ -9,6 +9,10 @@ pub fn config(cfg: &mut web::ServiceConfig) {
                 web::scope("/default_receiver").service(
                     web::resource("").route(web::get().to(receiver::get_default_receiver)),
                 ),
+            )
+            .service(
+                web::scope("/config")
+                    .service(web::resource("").route(web::get().to(config::get_web_config))),
             )
             .service(
                 web::scope("/auth").service(
@@ -53,7 +57,10 @@ pub fn config(cfg: &mut web::ServiceConfig) {
                                         .route(web::delete().to(receiver::delete_receiver)),
                                 ),
                             ),
-                    ),
+                    )
+                    .service(web::scope("/config").service(
+                        web::resource("").route(web::put().to(config::update_web_config)),
+                    )),
             ), // .service(
                //     web::scope("/omics")
                //         .wrap(api_auth::CheckLogin)

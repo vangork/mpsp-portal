@@ -153,6 +153,9 @@
     "delete": "删除",
     "confirm_delete": "您确定要删除 {name} 吗？"
   },
+  "config": {
+    "preview": "预览"
+  },
   "omics": {
     "add_item": "添加",
     "get_report": "获取报告",

@@ -44,3 +44,10 @@ export const roundTo = function (num: number | null, places: number) {
   const factor = 10 ** places
   return Math.round(num * factor) / factor
 }
+
+export const parseOptions = (options: string) => {
+  return options
+    .split(/[,;，；]/)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0)
+}

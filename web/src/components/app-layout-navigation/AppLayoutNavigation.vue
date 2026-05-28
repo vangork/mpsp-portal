@@ -9,7 +9,10 @@
 
     <nav class="flex items-center">
       <VaBreadcrumbs>
-        <VaBreadcrumbsItem :label="t('dashboard.home')" :to="{ name: 'dashboard' }" />
+        <VaBreadcrumbsItem
+          :label="t('dashboard.home')"
+          :to="isAdmin ? { name: 'admin_dashboard' } : { name: 'dashboard' }"
+        />
         <VaBreadcrumbsItem
           v-for="item in items"
           :key="item.label"

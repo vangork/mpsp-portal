@@ -9,3 +9,8 @@ export type Receiver = Contact & {
   id: number
   default: boolean
 }
+
+export type Config = {
+  sample_types: string
+  test_items: string
+}
