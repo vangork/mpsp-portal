@@ -76,6 +76,9 @@
     "projects": "Projects Kanban",
     "projects_details": "Projects Details",
     "billing_info": "Billing info",
+    "config": "Configuration",
+    "receivers": "Receivers",
+    "other_config": "Other Config",
     "quartet": "Quartet",
     "plasmix": "Plasmix",
     "dna": "Genomics",
@@ -84,6 +87,19 @@
     "metabolism": "Metabolism",
     "plasmix_protein": "Proteomics",
     "plasmix_metabolism": "Metabolism"
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "address": "Address",
+    "institution": "Institution",
+    "phone": "Phone",
+    "default_receiver": "Default receiver",
+    "add_receiver": "Add Receiver",
+    "edit_receiver": "Edit Receiver",
+    "delete_receiver": "Delete Receiver",
+    "delete":"Delete",
+    "confirm_delete": "Are you sure you want to delete {name}?"
   },
   "omics": {
     "add_item": "Add Item",

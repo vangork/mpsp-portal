@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { getDefaultReceiver } from '../data/pages/receivers'
+import { Receiver } from '../pages/admin/config/types'
 import { SAMPLE_TYPE_OPTIONS, TEST_ITEM_OPTIONS } from './user/projects/types'
 
 const router = useRouter()
@@ -10,6 +12,15 @@ const collaborator = ref({
   institution: '',
   phone: '',
   email: '',
+})
+
+const receiver = ref<Receiver>({
+  id: -1,
+  name: 'Loading...',
+  institution: 'Loading...',
+  phone: 'Loading...',
+  email: 'Loading...',
+  default: true,
 })
 
 interface SampleEntry {
@@ -79,6 +90,19 @@ const confirmSubmit = () => {
 const cancelSubmit = () => {
   showConfirm.value = false
 }
+
+onMounted(async () => {
+  try {
+    const defaultReceiver = await getDefaultReceiver()
+    if (defaultReceiver) {
+      receiver.value = defaultReceiver
+      return
+    }
+  } catch (err) {
+    console.error('Failed to fetch default receiver:', err)
+  }
+  console.warn('No default receiver configured')
+})
 </script>
 
 <template>
@@ -170,7 +194,7 @@ const cancelSubmit = () => {
           <div class="info-card">
             <div class="field-grid">
               <div class="field">
-                <label>合作者姓名 <span class="required">*</span></label>
+                <label>姓名 <span class="required">*</span></label>
                 <input v-model="collaborator.name" type="text" placeholder="请输入姓名" />
               </div>
               <div class="field">
@@ -283,6 +307,37 @@ const cancelSubmit = () => {
                 只能包含字母、数字和符号下划线 <code>_</code>
               </li>
             </ul>
+          </div>
+        </section>
+
+        <!-- ── SECTION 3: Receiver Info ── -->
+        <section class="form-section">
+          <div class="form-section-header">
+            <div class="step-num">03</div>
+            <div>
+              <h2 class="form-section-title">样本接收者信息</h2>
+              <p class="form-section-desc">请将样本快递至如下地址信息，或与平台工作人员确认</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="field-grid">
+              <div class="field">
+                <label>姓名</label>
+                <input v-model="receiver.name" type="text" placeholder="请输入姓名" disabled />
+              </div>
+              <div class="field">
+                <label>送样地址</label>
+                <input v-model="receiver.institution" type="text" placeholder="请输入所在单位或机构" />
+              </div>
+              <div class="field">
+                <label>联系电话</label>
+                <input v-model="receiver.phone" type="tel" placeholder="请输入手机号码" />
+              </div>
+              <div class="field">
+                <label>联系邮箱</label>
+                <input v-model="receiver.email" type="email" placeholder="请输入电子邮箱" />
+              </div>
+            </div>
           </div>
         </section>
 

@@ -1,10 +1,16 @@
-use crate::handlers::{auth, omics, user};
+use crate::handlers::{auth, receiver, user};
 use crate::middlewares::api_auth;
 use actix_web::web;
 
 pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::scope("/api")
+            .service(
+                web::scope("/default_receiver").service(
+                    web::resource("")
+                        .route(web::get().to(receiver::get_default_receiver))
+                ),
+            )
             .service(
                 web::scope("/auth").service(
                     web::resource("/token")
@@ -35,247 +41,41 @@ pub fn config(cfg: &mut web::ServiceConfig) {
                             )),
                     )
                     .service(
-                        web::scope("/omics")
+                        web::scope("/receivers")
                             .service(
-                                web::scope("/quartet")
-                                    .service(
-                                        web::scope("/dna")
-                                            .service(
-                                                web::resource("").route(
-                                                    web::get().to(omics::list_dna_with_username),
-                                                ),
-                                            )
-                                            .service(
-                                                web::scope("/{dna_id}")
-                                                    .service(
-                                                        web::resource("/vcf").route(
-                                                            web::get().to(omics::signature_dna_vcf),
-                                                        ),
-                                                    )
-                                                    .service(
-                                                        web::resource("/score").route(
-                                                            web::put().to(omics::update_dna_score),
-                                                        ),
-                                                    ),
-                                            ),
-                                    )
-                                    .service(
-                                        web::scope("/rna")
-                                            .service(
-                                                web::resource("").route(
-                                                    web::get().to(omics::list_rna_with_username),
-                                                ),
-                                            )
-                                            .service(
-                                                web::scope("/{rna_id}")
-                                                    .service(web::resource("/data").route(
-                                                        web::get().to(omics::get_rna_data_signature),
-                                                    ))
-                                                    .service(
-                                                        web::resource("/notes").route(
-                                                            web::put().to(omics::update_rna_notes),
-                                                        ),
-                                                    ),
-                                            ),
-                                    )
-                                    .service(
-                                        web::scope("/protein")
-                                            .service(
-                                                web::resource("").route(
-                                                    web::get().to(omics::list_protein_with_username),
-                                                ),
-                                            )
-                                            .service(
-                                                web::scope("/{protein_id}")
-                                                    .service(web::resource("/data").route(
-                                                        web::get().to(omics::get_protein_data_signature),
-                                                    ))
-                                                    .service(
-                                                        web::resource("/notes").route(
-                                                            web::put().to(omics::update_protein_notes),
-                                                        ),
-                                                    ),
-                                            ),
-                                    )
-                                    .service(
-                                        web::scope("/metabolism")
-                                            .service(
-                                                web::resource("").route(
-                                                    web::get().to(omics::list_metabolism_with_username),
-                                                ),
-                                            )
-                                            .service(
-                                                web::scope("/{metabolism_id}")
-                                                    .service(web::resource("/data").route(
-                                                        web::get().to(omics::get_metabolism_data_signature),
-                                                    ))
-                                                    .service(
-                                                        web::resource("/notes").route(
-                                                            web::put().to(omics::update_metabolism_notes),
-                                                        ),
-                                                    ),
-                                            ),
-                                    ),
+                                web::resource("")
+                                    .route(web::get().to(receiver::list_receivers))
+                                    .route(web::post().to(receiver::add_receiver)),
                             )
-                            .service(
-                                web::scope("/plasmix")
-                                    .service(
-                                        web::scope("/protein")
-                                            .service(
-                                                web::resource("").route(
-                                                    web::get().to(omics::list_plasmix_protein_with_username),
-                                                ),
-                                            )
-                                            .service(
-                                                web::scope("/{protein_id}")
-                                                    .service(web::resource("/data").route(
-                                                        web::get().to(omics::get_plasmix_protein_data_signature),
-                                                    ))
-                                                    .service(
-                                                        web::resource("/notes").route(
-                                                            web::put().to(omics::update_plasmix_protein_notes),
-                                                        ),
-                                                    ),
-                                            ),
-                                    )
-                                    .service(
-                                        web::scope("/metabolism")
-                                            .service(
-                                                web::resource("").route(
-                                                    web::get().to(omics::list_plasmix_metabolism_with_username),
-                                                ),
-                                            )
-                                            .service(
-                                                web::scope("/{metabolism_id}")
-                                                    .service(web::resource("/data").route(
-                                                        web::get().to(omics::get_plasmix_metabolism_data_signature),
-                                                    ))
-                                                    .service(
-                                                        web::resource("/notes").route(
-                                                            web::put().to(omics::update_plasmix_metabolism_notes),
-                                                        ),
-                                                    ),
-                                            ),
-                                    ),
-                            ),
-                    ),
-            )
-            .service(
-                web::scope("/omics")
-                    .wrap(api_auth::CheckLogin)
-                    .service(web::resource("/token").route(web::get().to(omics::oss_token)))
-                    .service(
-                        web::scope("/quartet")
-                            .service(
-                                web::scope("/dna")
-                                    .service(
-                                        web::resource("")
-                                            .route(web::post().to(omics::add_dna))
-                                            .route(web::get().to(omics::list_dna)),
-                                    )
-                                    .service(
-                                        web::resource("/report")
-                                            .route(web::post().to(omics::generate_dna_report)),
-                                    )
-                                    .service(web::scope("/{dna_id}").service(
-                                        web::resource("").route(web::put().to(omics::update_dna)),
-                                    )),
-                            )
-                            .service(
-                                web::scope("/rna")
-                                    .service(
-                                        web::resource("")
-                                            .route(web::post().to(omics::add_rna))
-                                            .route(web::get().to(omics::list_rna)),
-                                    )
-                                    .service(
-                                        web::scope("/{rna_id}")
-                                            .service(
-                                                web::resource("")
-                                                    .route(web::put().to(omics::update_rna)),
-                                            )
-                                            .service(
-                                                web::resource("/report")
-                                                    .route(web::get().to(omics::get_rna_report)),
-                                            ),
-                                    ),
-                            )
-                            .service(
-                                web::scope("/protein")
-                                    .service(
-                                        web::resource("")
-                                            .route(web::post().to(omics::add_protein))
-                                            .route(web::get().to(omics::list_protein)),
-                                    )
-                                    .service(
-                                        web::scope("/{protein_id}")
-                                            .service(
-                                                web::resource("")
-                                                    .route(web::put().to(omics::update_protein)),
-                                            )
-                                            .service(
-                                                web::resource("/report").route(
-                                                    web::get().to(omics::get_protein_report),
-                                                ),
-                                            ),
-                                    ),
-                            )
-                            .service(
-                                web::scope("/metabolism")
-                                    .service(
-                                        web::resource("")
-                                            .route(web::post().to(omics::add_metabolism))
-                                            .route(web::get().to(omics::list_metabolism)),
-                                    )
-                                    .service(
-                                        web::scope("/{metabolism_id}")
-                                            .service(
-                                                web::resource("")
-                                                    .route(web::put().to(omics::update_metabolism)),
-                                            )
-                                            .service(web::resource("/report").route(
-                                                web::get().to(omics::get_metabolism_report),
-                                            )),
-                                    ),
-                            ),
+                            .service(web::scope("/{receiver_id}").service(
+                                web::resource("")
+                                    .route(web::put().to(receiver::update_receiver))
+                                    .route(web::delete().to(receiver::delete_receiver)),
+                            )),
                     )
-                    .service(
-                        web::scope("/plasmix")
-                            .service(
-                                web::scope("/protein")
-                                    .service(
-                                        web::resource("")
-                                            .route(web::post().to(omics::add_plasmix_protein))
-                                            .route(web::get().to(omics::list_plasmix_protein)),
-                                    )
-                                    .service(
-                                        web::scope("/{protein_id}")
-                                            .service(web::resource("").route(
-                                                web::put().to(omics::update_plasmix_protein),
-                                            ))
-                                            .service(web::resource("/report").route(
-                                                web::get().to(omics::get_plasmix_protein_report),
-                                            )),
-                                    ),
-                            )
-                            .service(
-                                web::scope("/metabolism")
-                                    .service(
-                                        web::resource("")
-                                            .route(web::post().to(omics::add_plasmix_metabolism))
-                                            .route(web::get().to(omics::list_plasmix_metabolism)),
-                                    )
-                                    .service(
-                                        web::scope("/{metabolism_id}")
-                                            .service(web::resource("").route(
-                                                web::put().to(omics::update_plasmix_metabolism),
-                                            ))
-                                            .service(web::resource("/report").route(
-                                                web::get().to(omics::get_plasmix_metabolism_report),
-                                            )),
-                                    ),
-                            ),
-                    ),
-            ),
+            )
+            // .service(
+            //     web::scope("/omics")
+            //         .wrap(api_auth::CheckLogin)
+            //         .service(web::resource("/token").route(web::get().to(omics::oss_token)))
+            //         .service(
+            //             web::scope("/quartet")
+            //                 .service(
+            //                     web::scope("/dna")
+            //                         .service(
+            //                             web::resource("")
+            //                                 .route(web::post().to(omics::add_dna))
+            //                                 .route(web::get().to(omics::list_dna)),
+            //                         )
+            //                         .service(
+            //                             web::resource("/report")
+            //                                 .route(web::post().to(omics::generate_dna_report)),
+            //                         )
+            //                         .service(web::scope("/{dna_id}").service(
+            //                             web::resource("").route(web::put().to(omics::update_dna)),
+            //                         )),
+            //                 )
+            //         )
+            // ),
     );
 }

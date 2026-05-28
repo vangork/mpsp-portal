@@ -128,6 +128,9 @@
     "projects": "项目看板",
     "projects_details": "项目详情",
     "billing_info": "报价清单",
+    "config": "平台配置",
+    "receivers": "接收者信息",
+    "other_config": "其他配置",
     "quartet": "Quartet",
     "plasmix": "Plasmix",
     "dna": "基因组",
@@ -136,6 +139,19 @@
     "metabolism": "代谢组",
     "plasmix_protein": "蛋白组",
     "plasmix_metabolism": "代谢组"
+  },
+  "contact": {
+    "name": "姓名",
+    "email": "邮箱",
+    "address": "地址",
+    "institution": "机构",
+    "phone": "电话",
+    "default_receiver": "默认接收人",
+    "add_receiver": "添加接收人",
+    "edit_receiver": "编辑接收人",
+    "delete_receiver": "删除接收人",
+    "delete":"删除",
+    "confirm_delete": "您确定要删除 {name} 吗？"
   },
   "omics": {
     "add_item": "添加",

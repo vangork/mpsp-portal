@@ -100,6 +100,23 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../pages/admin/billing/Bills.vue'),
       },
       {
+        name: 'admin_config',
+        path: 'config',
+        component: RouterPassthrough,
+        children: [
+          {
+            name: 'admin_receivers',
+            path: 'receivers',
+            component: () => import('../pages/admin/config/Receivers.vue'),
+          },
+          {
+            name: 'admin_other',
+            path: 'other',
+            component: () => import('../pages/admin/config/Other.vue'),
+          },
+        ],
+      },
+      {
         name: 'admin_quartet',
         path: 'quartet',
         component: RouterPassthrough,

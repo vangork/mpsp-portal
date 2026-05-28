@@ -36,6 +36,13 @@ const feeRows: { label: string; key: keyof Pick<AdminBill, 'extractionFee' | 'qu
   { label: '测序费', key: 'sequencingFee' },
   { label: '个性化数据分析费', key: 'analysisServiceFee' },
 ]
+
+const statusOptions = ref<{ text: string; value: number }[]>([
+  { text: '未开始', value: 0 },
+  { text: '已发送报价单', value: 1 },
+  { text: '已开票', value: 2 },
+  { text: '已打款', value: 3 },
+])
 </script>
 
 <template>
@@ -101,10 +108,10 @@ const feeRows: { label: string; key: keyof Pick<AdminBill, 'extractionFee' | 'qu
       <div class="flex gap-4 flex-col sm:flex-row w-full">
         <VaSelect
           v-model="newItem.status"
+          :options="statusOptions"
           label="财务状态"
           class="w-full sm:w-1/2"
-          value-by="value"
-          placeholder="财务状态"
+          placeholder="请选择"
         />
       </div>
 

@@ -94,8 +94,8 @@ const beforeEditFormModalClose = async (hide: () => unknown) => {
     v-model="doShowEditUserModal"
     size="small"
     mobile-fullscreen
-    close-button
     hide-default-actions
+    no-outside-dismiss
     :before-cancel="beforeEditFormModalClose"
   >
     <h1 class="va-h5">{{ userToEdit ? t('user.edit_user') : t('user.add_user') }}</h1>

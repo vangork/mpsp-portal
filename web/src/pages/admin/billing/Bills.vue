@@ -169,21 +169,22 @@ const { confirm } = useModal()
 
 const onItemSaved = async (item: AdminBill, ok: () => void) => {
   errorMsg.value = ''
-  const agreed = await confirm({
-    title: t('dna.update_score'),
-    message: t('dna.confirm_update_score', { name: item.name }),
-    okText: t('omics.save'),
-    cancelText: t('omics.cancel'),
-    size: 'small',
-    maxWidth: '380px',
-  })
-  if (agreed) {
-    try {
-      await adminBillsStore.updateBill(item)
-      ok()
-    } catch (e) {
-      errorMsg.value = e as string
-    }
-  }
+  // const agreed = await confirm({
+  //   title: t('dna.update_score'),
+  //   message: t('dna.confirm_update_score', { name: item.name }),
+  //   okText: t('omics.save'),
+  //   cancelText: t('omics.cancel'),
+  //   size: 'small',
+  //   maxWidth: '380px',
+  // })
+  // if (agreed) {
+  //   try {
+  //     await adminBillsStore.updateBill(item)
+  //     ok()
+  //   } catch (e) {
+  //     errorMsg.value = e as string
+  //   }
+  // }
+  ok()
 }
 </script>

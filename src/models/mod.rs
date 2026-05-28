@@ -1,2 +1,2 @@
-pub mod omics;
+pub mod receiver;
 pub mod user;

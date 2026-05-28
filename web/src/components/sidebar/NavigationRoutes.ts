@@ -82,5 +82,22 @@ export const adminNavigationRoutes = {
         icon: 'credit_card',
       },
     },
+    {
+      name: 'admin_config',
+      displayName: 'menu.config',
+      meta: {
+        icon: 'settings',
+      },
+      children: [
+        {
+          name: 'admin_receivers',
+          displayName: 'menu.receivers',
+        },
+        {
+          name: 'admin_other',
+          displayName: 'menu.other_config',
+        },
+      ],
+    },
   ] as INavigationRoute[],
 }
