@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { getConfig } from '../data/pages/config'
 import { getDefaultReceiver } from '../data/pages/receivers'
-import { Receiver } from '../pages/admin/config/types'
-import { SAMPLE_TYPE_OPTIONS, TEST_ITEM_OPTIONS } from './user/projects/types'
+import { Config, Receiver } from '../pages/admin/config/types'
+import { parseOptions } from '../services/utils'
 
 const router = useRouter()
 
@@ -22,6 +23,14 @@ const receiver = ref<Receiver>({
   email: 'Loading...',
   default: true,
 })
+
+const config = ref<Config>({
+  sample_types: '',
+  test_items: '',
+})
+
+const sampleTypes = computed(() => parseOptions(config.value.sample_types))
+const testItems = computed(() => parseOptions(config.value.test_items))
 
 interface SampleEntry {
   id: number
@@ -93,15 +102,22 @@ const cancelSubmit = () => {
 
 onMounted(async () => {
   try {
+    config.value = await getConfig()
+  } catch (err) {
+    console.error('Error fetching config:', err)
+  }
+
+  try {
     const defaultReceiver = await getDefaultReceiver()
     if (defaultReceiver) {
       receiver.value = defaultReceiver
       return
+    } else {
+      console.warn('No default receiver configured')
     }
   } catch (err) {
     console.error('Failed to fetch default receiver:', err)
   }
-  console.warn('No default receiver configured')
 })
 </script>
 
@@ -251,7 +267,7 @@ onMounted(async () => {
                     <td>
                       <select v-model="sample.sampleType">
                         <option value="">请选择</option>
-                        <option v-for="option in SAMPLE_TYPE_OPTIONS" :value="option">
+                        <option v-for="option in sampleTypes" :value="option">
                           {{ option }}
                         </option>
                       </select>
@@ -263,7 +279,7 @@ onMounted(async () => {
                     <td>
                       <select v-model="sample.testItem">
                         <option value="">请选择</option>
-                        <option v-for="option in TEST_ITEM_OPTIONS" :value="option">
+                        <option v-for="option in testItems" :value="option">
                           {{ option }}
                         </option>
                       </select>

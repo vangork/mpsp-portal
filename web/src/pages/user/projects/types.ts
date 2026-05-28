@@ -14,16 +14,6 @@ export type StageIndex = (typeof STAGES)[number]['idx']
 
 export const STAGE_STEPS = STAGES.map((s) => ({ label: s.label }))
 
-export const SAMPLE_TYPE_OPTIONS = ['细胞', 'FFPE白片', '新鲜冻存组织', '全血', '血浆', '血清', 'cfDNA', 'DNA', 'RNA']
-
-export const TEST_ITEM_OPTIONS = [
-  '全基因组测序',
-  '全外显子组测序',
-  '转录组测序(Poly-A法)',
-  '转录组测序(Ribo-zero法)',
-  '小RNA测序',
-]
-
 export type SampleEntry = {
   id: number
   originalName: string
