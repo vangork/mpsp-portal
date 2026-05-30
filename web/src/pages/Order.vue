@@ -17,10 +17,10 @@ const collaborator = ref({
 
 const receiver = ref<Receiver>({
   id: -1,
-  name: 'Loading...',
-  institution: 'Loading...',
-  phone: 'Loading...',
-  email: 'Loading...',
+  name: '加载中...',
+  institution: '加载中...',
+  phone: '加载中...',
+  email: '加载中...',
   default: true,
 })
 
@@ -88,7 +88,13 @@ const submitted = ref(false)
 const showConfirm = ref(false)
 
 const handleSubmit = () => {
-  showConfirm.value = true
+  const form = document.getElementById('order-form') as HTMLFormElement
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+  })
+  if (form && form.checkValidity()) {
+    showConfirm.value = true
+  }
 }
 
 const confirmSubmit = () => {
@@ -125,7 +131,7 @@ onMounted(async () => {
   <div class="order-page">
     <!-- ── CONFIRM DIALOG ── -->
     <Transition name="dialog-fade">
-      <div v-if="showConfirm" class="dialog-overlay" @click.self="cancelSubmit">
+      <div v-if="showConfirm" class="dialog-overlay">
         <div class="dialog-box">
           <div class="dialog-icon"><i class="fas fa-paper-plane"></i></div>
           <h3 class="dialog-title">确认提交</h3>
@@ -197,7 +203,7 @@ onMounted(async () => {
         </div>
       </div>
 
-      <template v-else>
+      <form v-else id="order-form">
         <!-- ── SECTION 1: Collaborator Info ── -->
         <section class="form-section">
           <div class="form-section-header">
@@ -211,19 +217,19 @@ onMounted(async () => {
             <div class="field-grid">
               <div class="field">
                 <label>姓名 <span class="required">*</span></label>
-                <input v-model="collaborator.name" type="text" placeholder="请输入姓名" />
+                <input v-model="collaborator.name" type="text" placeholder="请输入姓名" required oninvalid="this.setCustomValidity('请输入姓名')" oninput="this.setCustomValidity('')"/>
               </div>
               <div class="field">
                 <label>送样单位 <span class="required">*</span></label>
-                <input v-model="collaborator.institution" type="text" placeholder="请输入所在单位或机构" />
+                <input v-model="collaborator.institution" type="text" placeholder="请输入所在单位或机构" required oninvalid="this.setCustomValidity('请输入所在单位或机构')" oninput="this.setCustomValidity('')"/>
               </div>
               <div class="field">
                 <label>联系电话 <span class="required">*</span></label>
-                <input v-model="collaborator.phone" type="tel" placeholder="请输入手机号码" />
+                <input v-model="collaborator.phone" type="tel" placeholder="请输入手机号码" required oninvalid="this.setCustomValidity('请输入手机号码')" oninput="this.setCustomValidity('')"/>
               </div>
               <div class="field">
                 <label>联系邮箱 <span class="required">*</span></label>
-                <input v-model="collaborator.email" type="email" placeholder="请输入电子邮箱" />
+                <input v-model="collaborator.email" type="email" placeholder="请输入电子邮箱" required oninvalid="this.setCustomValidity('请输入有效的电子邮箱')" oninput="this.setCustomValidity('')"/>
               </div>
             </div>
           </div>
@@ -263,21 +269,21 @@ onMounted(async () => {
                     <td class="col-id">
                       <span class="id-badge">{{ sample.id }}</span>
                     </td>
-                    <td><input v-model="sample.originalName" type="text" placeholder="样本名称" /></td>
+                    <td><input v-model="sample.originalName" type="text" placeholder="样本名称" required oninvalid="this.setCustomValidity('请输入样本名称')" oninput="this.setCustomValidity('')"/></td>
                     <td>
-                      <select v-model="sample.sampleType">
+                      <select v-model="sample.sampleType" required oninvalid="this.setCustomValidity('请选择样本类型')" oninput="this.setCustomValidity('')">
                         <option value="">请选择</option>
                         <option v-for="option in sampleTypes" :value="option">
                           {{ option }}
                         </option>
                       </select>
                     </td>
-                    <td><input v-model="sample.species" type="text" placeholder="物种" /></td>
-                    <td><input v-model="sample.tubeCount" type="number" min="1" placeholder="管数" /></td>
-                    <td><input v-model="sample.concentration" type="number" min="0" placeholder="ng/μL" /></td>
-                    <td><input v-model="sample.volume" type="number" min="0" placeholder="μL" /></td>
+                    <td><input v-model="sample.species" type="text" placeholder="物种" required oninvalid="this.setCustomValidity('请输入物种')" oninput="this.setCustomValidity('')"/></td>
+                    <td><input v-model="sample.tubeCount" type="number" min="1" placeholder="管数" required oninvalid="this.setCustomValidity('请输入管数')" oninput="this.setCustomValidity('')"/></td>
+                    <td><input v-model="sample.concentration" type="number" min="0" step="0.1" placeholder="ng/μL" /></td>
+                    <td><input v-model="sample.volume" type="number" min="0" step="0.1" placeholder="μL" /></td>
                     <td>
-                      <select v-model="sample.testItem">
+                      <select v-model="sample.testItem" required oninvalid="this.setCustomValidity('请选择检测项目')" oninput="this.setCustomValidity('')">
                         <option value="">请选择</option>
                         <option v-for="option in testItems" :value="option">
                           {{ option }}
@@ -339,15 +345,15 @@ onMounted(async () => {
               </div>
               <div class="field">
                 <label>送样地址</label>
-                <input v-model="receiver.institution" type="text" placeholder="请输入所在单位或机构" />
+                <input v-model="receiver.institution" type="text" placeholder="请输入所在单位或机构" disabled/>
               </div>
               <div class="field">
                 <label>联系电话</label>
-                <input v-model="receiver.phone" type="tel" placeholder="请输入手机号码" />
+                <input v-model="receiver.phone" type="tel" placeholder="请输入手机号码" disabled />
               </div>
               <div class="field">
                 <label>联系邮箱</label>
-                <input v-model="receiver.email" type="email" placeholder="请输入电子邮箱" />
+                <input v-model="receiver.email" type="email" placeholder="请输入电子邮箱" disabled />
               </div>
             </div>
           </div>
@@ -364,7 +370,7 @@ onMounted(async () => {
             提交样本信息单
           </button>
         </div>
-      </template>
+      </form>
     </main>
 
     <!-- ── FOOTER ── -->

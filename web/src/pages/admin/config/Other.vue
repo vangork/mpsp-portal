@@ -87,8 +87,8 @@ const { t } = useI18n()
 const { init } = useToast()
 
 const config = ref<Config>({
-  sample_types: 'Loading...',
-  test_items: 'Loading...',
+  sample_types: '加载中...',
+  test_items: '加载中...',
 })
 
 const doShowSaveModal = ref(false)
